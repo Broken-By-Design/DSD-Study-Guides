@@ -9,126 +9,253 @@
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
     <style>
-    :root {
+      :root {
         --pico-primary: #38bdf8;
-    }
+      }
 
-    .hero {
+      .hero {
         text-align: center;
         padding: 3rem 0 2rem;
-    }
+      }
 
-    .hero h1 {
+      .hero h1 {
         font-size: 2.5rem;
         margin-bottom: 0.5rem;
-    }
+      }
 
-    .hero p {
+      .hero p {
         color: var (--pico-muted-color);
         font-size: 1.1rem;
         margin-bottom: 0;
-    }
+      }
 
-    .section-title {
+      .section-title {
         font-size: 1.1rem;
         font-weight: 600;
         color: var(--pico-muted-color);
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-bottom: 2rem;
-    }
+      }
 
-    .card-grid {
+      .card-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1rem;
         margin-bottom: 2rem;
-    }
+      }
 
-    .guide-card {
+      .guide-card {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-    }
+      }
 
-    .guide-card h3 {
+      .guide-card h3 {
         margin: 0;
         font-size: 1rem;
-    }
+      }
 
-    .guide-card p {
+      .guide-card p {
         margin: 0;
         font-size: 0.85rem;
         color: var(--pico-muted-color);
-    }
+      }
 
-    .guide-card a[role="button"] {
+      .guide-card a[role="button"] {
         margin-top: auto;
-    }
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: var(--pico-secondary-background);
+        color: var(--pico-muted-color);
+        margin-bottom: 4px;
+      }
+
+      .badge.new {
+        background: #0c4a6e;
+        color: #38bdf8;
+      }
+
+      .coming-soon {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .collab {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+
+      .collab-chip {
+        background: var(--pico-card-background-color);
+        border: 1px solid var(--pico-card-border-color);
+        border-radius: 999px;
+        padding: 4px 14px;
+        font-size: 0.84rem;
+      }
+
+      .theme-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .segment {
+          display: inline-flex;
+          border: 1px solid var(--pico-muted-border-color);
+          border-radius: 999px;
+          overflow: hidden;
+          padding: 3px;
+          gap: 2px;
+          background: var(--pico-card-background-color);
+      }
 
 
+      .segment button {
+          margin: 0;
+          padding: 6px 10px;
+          border: none;
+          border-radius: 999px;
+          background: transparent;
+          color: var(--pico-muted-color);
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+          transition: background 0.2s, color 0.2s;
+      }
+
+      .segment button.active {
+          background: var(--pico-primary);
+          color: #fff;
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--pico-card-border-color);
+      }
     </style>
   </head>
 
   <body>
     <main class="container">
-      <header>
-        <hgroup>
-          <h1>DSD Study and Revision tools</h1>
-        </hgroup>
-      </header>
-      <div style="display: flex; gap; 1rem; justify-content: center;">
-        <h3>Revision Guides!</h3>
-        <button>Core Paper 1 (OLD SPEC)</button>
-        <button>Core Paper 2 (OLD SPEC)</button>
-      </div>
-      <p>More Tools Will be added as soon as they are made :3</p>
-      <footer>
-        <p>This was made to Help Students on the DSD T-Level</p>
-        <p>
-          This project is a collaboration By: <br />- Rs <br />- Tp <br />- Ag
-        </p>
+        <div class="hero">
+            <h1>📚DSD Study & Revision 💻</h1>
+            <p>Tools to help Digital Software Development Students Smash those exams!!</p>
+        </div>
 
-        <fieldset>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="light"
-              checked
-              onchange="setTheme('light')"
-            />
-            ☀️ Light
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="dark"
-              checked
-              onchange="setTheme('dark')"
-            />
-            🌙 Dark
-          </label>
-        </fieldset>
-      </footer>
+        <hr>
+
+        <section>
+            <p class="section-title">📖 Revision Guides</p>
+            <div class="card-grid">
+                <article class="guide-card">
+                    <span class="badge">Old Spec</span>
+                    <h3>Core Paper 1</h3>
+                    <p>Problem solving, Intro to Programming, Emerging Issues, Legislation & Regulation!</p>
+                    <a href="#" role="button">Open Guide -></a>
+                </article>
+
+                <article class="guide-card">
+                    <span class="badge">Old Spec</span>
+                    <h3>Core Paper 2</h3>
+                    <p>Business Context, Data, Networking & Digital Environments, Security!</p>
+                    <a href="#" role="button">Open Guide -></a>
+                </article>
+            </div>
+            <div class="card-grid">
+                <article class="guide-card">
+                    <span class="badge">Old Spec</span>
+                    <h3>Employer Set Project</h3>
+                    <p>Planning, Debugging, Designing, Developing, Evaluating</p>
+                    <a href="#" role="button">Open ESP Guide -></a>
+                </article>
+
+                <article class="guide-card">
+                    <span class="badge">Old Spec?</span>
+                    <h3>Occupational Specialism Project</h3>
+                    <p>Requirements, Design Implement & Test, Change & Support, Collaboration, Knowledge sources, Ethics & Risk</p>
+                    <a href="#" role="button">Open OSP Guide -></a>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <p class="section-title">🛠️ More Tools</p>
+            <div class="card-grid">
+
+                <article class="guide-card coming-soon">
+                    <span class="badge new">Coming Soon</span>
+                    <h3>Content area 1 - 8 Separately</h3>
+                    <p>Work through all content areas in more depth!</p>
+                    <a href="#" role="button" class="secondary">Coming Soon!</a>
+                </article>
+            </div>
+            <p><small>More tools will be added as they are made :3</small></p>
+        </section>
     </main>
-  </body>
-  <script>
-    const html = document.documentElement;
-    const btn = document.getElementById("theme-toggle");
 
-    function setTheme(theme) {
-      html.setAttribute("data-theme", theme);
-      btn.textContent = theme === "dark" ? "☀️ Light" : "🌙 Dark";
-      document
-        .querySelectorAll('input[name="theme"]')
-        .forEach((r) => (r.checked = r.value === theme));
+        <hr>
+
+    <footer class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <p style="margin: 0 0 0.5rem;"><strong>Made for DSD T-Level students</strong></p>
+                <p style="margin: 0 0 0.5rem; color: var(--pico-muted-color); font-size: 0.85rem;">A collaboration between:</p>
+                <div class="collab">
+                    <span class="collab-chip">Tp</span>
+                    <span class="collab-chip">Ag</span>
+                </div>
+                <p style="margin: 0 0 0.5rem; color: var(--pico-muted-color); font-size: 0.85rem;">And Broken By Design:</p>
+                <div class="collab">
+                    <span class="collab-chip">Rs</span>
+                    <span class="collab-chip">Vp</span>
+                </div>
+            </div>
+            <div>
+                <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--pico-muted-color);">Theme</p>
+                <div class="segment">
+                    <button id="btn-system" title="System">💻</button>
+                    <button id="btn-light" title="Light">☀️</button>
+                    <button id="btn-dark" title="Dark" class="active">🌙</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+    const html = document.documentElement;
+    const buttons = {
+      system : document.getElementById('btn-system'),
+      light  : document.getElementById('btn-light'),
+      dark   : document.getElementById('btn-dark'),
+    };
+
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function setTheme(mode) {
+      Object.values(buttons).forEach(b => b.classList.remove('active'));
+      buttons[mode].classList.add('active')
+
+      if (mode === 'system') {
+        html.setAttribute('data-theme', systemDark.matches ? 'dark' : 'light');
+      } else {
+        html.setAttribute('data-theme', mode);
+      }
     }
 
-    btn.addEventListener("click", () => {
-      const current = html.getAttribute("data-theme");
-      setTheme(current === "dark" ? "light" : "dark");
+    buttons.system.addEventListener('click', () => setTheme('system'));
+    buttons.light.addEventListener('click', () => setTheme('light'));
+    buttons.dark.addEventListener('click', () => setTheme('dark'));
+
+    systemDark.addEventListener('change', () => {
+      if(buttons.system.classList.contains('active')) setTheme('system');
     });
   </script>
 </html>
