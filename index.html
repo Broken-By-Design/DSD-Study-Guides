@@ -1,12 +1,134 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>T Level DSD Study Resources</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        this is a page!
-    </body>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T Level DSD Study Resources</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <style>
+    :root {
+        --pico-primary: #38bdf8;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 3rem 0 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+        color: var (--pico-muted-color);
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--pico-muted-color);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 2rem;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .guide-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .guide-card h3 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .guide-card p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--pico-muted-color);
+    }
+
+    .guide-card a[role="button"] {
+        margin-top: auto;
+    }
+
+
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <header>
+        <hgroup>
+          <h1>DSD Study and Revision tools</h1>
+        </hgroup>
+      </header>
+      <div style="display: flex; gap; 1rem; justify-content: center;">
+        <h3>Revision Guides!</h3>
+        <button>Core Paper 1 (OLD SPEC)</button>
+        <button>Core Paper 2 (OLD SPEC)</button>
+      </div>
+      <p>More Tools Will be added as soon as they are made :3</p>
+      <footer>
+        <p>This was made to Help Students on the DSD T-Level</p>
+        <p>
+          This project is a collaboration By: <br />- Rs <br />- Tp <br />- Ag
+        </p>
+
+        <fieldset>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="light"
+              checked
+              onchange="setTheme('light')"
+            />
+            ☀️ Light
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="dark"
+              checked
+              onchange="setTheme('dark')"
+            />
+            🌙 Dark
+          </label>
+        </fieldset>
+      </footer>
+    </main>
+  </body>
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById("theme-toggle");
+
+    function setTheme(theme) {
+      html.setAttribute("data-theme", theme);
+      btn.textContent = theme === "dark" ? "☀️ Light" : "🌙 Dark";
+      document
+        .querySelectorAll('input[name="theme"]')
+        .forEach((r) => (r.checked = r.value === theme));
+    }
+
+    btn.addEventListener("click", () => {
+      const current = html.getAttribute("data-theme");
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+  </script>
 </html>
