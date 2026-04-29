@@ -8,212 +8,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     />
+    <link rel="stylesheet" href="./shared.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <style>
-        @font-face {
-        font-family: 'Monaspace Krypton';
-        src: url('./fonts/Monaspace Krypton Var.woff') format('woff');
-        font-weight: 100 800;
-        }
-
-        @font-face {
-        font-family: 'Monaspace Radon';
-        src: url('./fonts/Monaspace Radon Var.woff') format('woff');
-        font-weight: 100 800;
-        }
-
-        @font-face {
-        font-family: 'NF Symbols';
-        src: url('./fonts/SymbolsNerdFont-Regular.woff2') format('woff2');
-        }
-
-      :root {
-        --pico-primary: #a78bfa;
-        --pico-card-background-color: #1e1535;
-        --pico-card-border-color: #2d1f4e;
-        --pico-primary-background: #8b6fd4;
-        --pico-primary-hover-background: #7c3aed;
-      }
-
-      [data-theme="light"] {
-        --pico-card-background-color: #ffffff;
-        --pico-card-border-color: #7c3aed;
-        --pico-background-color: transparent;
-        --pico-muted-color: #4c1d95;
-        --pico-color: #1e1b4b;
-      }
-
-      [data-theme="light"] article.guide-card {
-        background: #bfb0fa;
-        border: none;
-      }
-
-      [data-theme="light"] body {
-        background: linear-gradient(135deg, #c4b5fd 0%, #e0e7ff 100%);
-      }
-
-      body {
-        background: linear-gradient(135deg, #1a0a2e 0%, #0a0a0a 100%);
-        min-height: 100vh;
-        font-family: 'Inter', 'NF Symbols', sans-serif;
-      }
-
-      h1, h2, h3, .section-title {
-        font-family: 'Monaspace Radon','NF Symbols', monospace;
-        }
-      }
-
-      .bbd-logo {
-          background: linear-gradient(90deg, #8D00FF, #3994D4);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-      }
-
-      .hero {
-        text-align: center;
-        padding: 3rem 0 2rem;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .hero p {
-        color: var(--pico-muted-color);
-        font-size: 1.1rem;
-        margin-bottom: 0;
-      }
-
-      .section-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--pico-muted-color);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 2rem;
-      }
-
-      .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .guide-card {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        border: 1px solid var(--pico-card-border-color);
-      }
-
-      .guide-card h3 {
-        margin: 0;
-        font-size: 1rem;
-      }
-
-      .guide-card p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--pico-muted-color);
-      }
-
-      .guide-card a[role="button"] {
-        margin-top: auto;
-      }
-
-      .badge {
-        display: inline-block;
-        font-size: 0.7rem;
-        padding: 2px 8px;
-        border-radius: 999px;
-        background: #7c3aed;
-        color: #ffffff;
-        margin-bottom: 4px;
-      }
-
-      .badge.new {
-        background: #0c4a6e;
-        color: #38bdf8;
-      }
-
-      .coming-soon {
-        opacity: 0.5;
-        pointer-events: none;
-      }
-
-      .collab {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-top: 0.5rem;
-      }
-
-      .collab-chip {
-        background: var(--pico-card-background-color);
-        border: 1px solid var(--pico-card-border-color);
-        border-radius: 999px;
-        padding: 4px 14px;
-        font-family: 'Monaspace Radon', monospace;
-        font-size: 0.84rem;
-      }
-
-      .collab-chip.owner {
-        border-color: var(--pico-primary);
-      }
-
-      .collab-chip.owner span {
-        background: linear-gradient(90deg, #8D00FF, #3994D4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-family: 'Monaspace Krypton', monospace;
-        font-size: 0.8rem;
-      }
-
-      .theme-bar {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .segment {
-          display: inline-flex;
-          border: 1px solid var(--pico-muted-border-color);
-          border-radius: 999px;
-          overflow: hidden;
-          padding: 3px;
-          gap: 2px;
-          background: var(--pico-card-background-color);
-      }
-
-
-      .segment button {
-          margin: 0;
-          padding: 6px 10px;
-          border: none;
-          border-radius: 999px;
-          background: transparent;
-          color: var(--pico-muted-color);
-          cursor: pointer;
-          font-size: 1rem;
-          line-height: 1;
-          transition: background 0.2s, color 0.2s;
-      }
-
-      .segment button.active {
-          background: var(--pico-primary);
-          color: #fff;
-      }
-
-      footer {
-        margin-top: 3rem;
-        padding-top: 1rem;
-        border-top: 1px solid var(--pico-card-border-color);
-      }
-    </style>
   </head>
 
   <body>
@@ -232,14 +28,18 @@
                     <span class="badge">Old Spec</span>
                     <h3>Core Paper 1</h3>
                     <p>Problem solving, Intro to Programming, Emerging Issues, Legislation & Regulation!</p>
-                    <a href="#" role="button">Open Guide -></a>
+                    <a role="button" onclick="openGuide('guides/Cp1-d.html', 'guides/Cp1-m.html')">
+                        Open Guide ->
+                    </a>
                 </article>
 
                 <article class="guide-card">
                     <span class="badge">Old Spec</span>
                     <h3>Core Paper 2</h3>
                     <p>Business Context, Data, Networking & Digital Environments, Security!</p>
-                    <a href="#" role="button">Open Guide -></a>
+                    <a role="button" onclick="openGuide('guides/Cp2-d.html','guides/Cp2-m.html')">
+                        Open Guide ->
+                    </a>
                 </article>
             </div>
             <div class="card-grid">
@@ -247,14 +47,16 @@
                     <span class="badge">Old Spec</span>
                     <h3>Employer Set Project</h3>
                     <p>Planning, Debugging, Designing, Developing, Evaluating</p>
-                    <a href="#" role="button">Open ESP Guide -></a>
+                    <a role="button" onclick="openGuide('guides/ESP-d.html','guides/ESP-m.html')">
+                        Open ESP Guide ->
+                    </a>
                 </article>
 
                 <article class="guide-card">
                     <span class="badge">Old Spec?</span>
                     <h3>Occupational Specialism Project</h3>
                     <p>Requirements, Design Implement & Test, Change & Support, Collaboration, Knowledge sources, Ethics & Risk</p>
-                    <a href="#" role="button">Open OSP Guide -></a>
+                    <a role="button" onclick="openGuide('guides/OSP-d.html','guides/OSP-m.html')">Open OSP Guide -></a>
                 </article>
             </div>
         </section>
@@ -303,33 +105,5 @@
             </div>
         </div>
     </footer>
-    <script>
-    const html = document.documentElement;
-    const buttons = {
-      system : document.getElementById('btn-system'),
-      light  : document.getElementById('btn-light'),
-      dark   : document.getElementById('btn-dark'),
-    };
-
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    function setTheme(mode) {
-      Object.values(buttons).forEach(b => b.classList.remove('active'));
-      buttons[mode].classList.add('active')
-
-      if (mode === 'system') {
-        html.setAttribute('data-theme', systemDark.matches ? 'dark' : 'light');
-      } else {
-        html.setAttribute('data-theme', mode);
-      }
-    }
-
-    buttons.system.addEventListener('click', () => setTheme('system'));
-    buttons.light.addEventListener('click', () => setTheme('light'));
-    buttons.dark.addEventListener('click', () => setTheme('dark'));
-
-    systemDark.addEventListener('change', () => {
-      if(buttons.system.classList.contains('active')) setTheme('system');
-    });
-  </script>
+    <script src="./index.js"></script>
 </html>
