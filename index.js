@@ -1,3 +1,15 @@
+if (typeof DisableDevtool !== "undefined") {
+    DisableDevtool({
+        md5: "2cd605dd2093f27550a9503096a53e32",
+        tkName: "secret",
+        ondevtoolopen: (type) => {
+            window.location.replace("https://www.google.com");
+        },
+        clearLog: true,
+        disableMenu: true,
+    });
+}
+
 function openGuide(pcUrl, mobileUrl) {
   const isMobile = window.innerWidth < 768;
   window.location.href = isMobile ? mobileUrl : pcUrl;
