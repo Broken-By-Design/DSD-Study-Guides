@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Core Paper 2 — T Level Digital Software Development</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="/icon/favicon.ico">
-<link rel="apple-touch-icon" href="/icon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../icon/favicon.ico">
+<link rel="apple-touch-icon" href="../icon/apple-touch-icon.png">
 <style>
 :root{
   --bg:#080b14;--surface:#0f1221;--surface2:#151929;--surface3:#1c2136;
@@ -354,7 +354,7 @@ code{
   </div>
   <div id="topbar-right">
     <div id="prog-track"><div id="prog-fill" style="width:0%"></div></div>
-    <span id="slide-num">1/28</span>
+    <span id="slide-num">1/27</span>
   </div>
 </header>
 <main id="stage">
@@ -873,9 +873,28 @@ function renderFinal(){
     +'<div class="score-sub">'+got+' / '+tot+' questions correct</div>'
     +'<p class="score-msg">'+msg+'</p>'
     +'<div class="score-grid">'+breakdown+'</div>'
-    +'<button class="nbtn" onclick="goTo(0)" style="margin:0 auto;display:flex;padding:10px 28px;">\uD83D\uDD04 Start Over</button>'
+    +'<button class="nbtn" onclick="resetAll()" style="margin:0 auto;display:flex;padding:10px 28px;">\uD83D\uDD04 Start Over</button>'
     +'<div class="ib" style="margin-top:24px;text-align:left"><strong>Exam info:</strong> Core Paper 2 is 2h15min \u00b7 90 marks \u00b7 June or November. Topics: Business Context (5.1\u20135.4), Data (6.1\u20136.12), Digital Environments (7.1\u20137.6), Security (8.1\u20138.4).</div>'
     +'</div>';
+}
+function resetAll(){
+  Object.keys(QUIZ).forEach(k=>{
+    state[k].s = 0;
+    state[k].a = new Array(QUIZ[k].length).fill(false);
+  });
+  ['qbiz','qdata','qenv','qsec','qmega'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.innerHTML='';
+    delete el.dataset.r;
+  });
+  cur = 0;
+  document.querySelectorAll('.slide').forEach((slide,i)=>{
+    slide.classList.toggle('active', i===0);
+    slide.classList.remove('out');
+  });
+  renderFinal();
+  updateUI();
 }
 
 function goTo(idx){
