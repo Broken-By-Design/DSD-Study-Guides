@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Employer Set Project — T Level Digital Software Development</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="../icon/favicon.ico">
+<link rel="apple-touch-icon" href="../icon/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#080b14;--surface:#0f1221;--surface2:#151929;--surface3:#1c2136;
+  --border:#1f2540;--border2:#2a3055;
+  --c1:#38bdf8;--c2:#818cf8;--c3:#fb923c;--c4:#4ade80;--c5:#facc15;--c6:#f472b6;
+  --text:#e2e8f0;--dim:#64748b;--danger:#f87171;
+  --sidebar-w:260px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;height:100dvh;}
+body{
+  font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);
+  overflow:hidden;display:flex;flex-direction:column;width:100%;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+#sidebar-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+#sidebar-overlay.open{opacity:1;pointer-events:all;}
+#sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  z-index:200;transition:transform .28s ease;
+  transform:translateX(-100%);
+}
+#sidebar.open{transform:translateX(0);}
+#sidebar-header{
+  padding:16px 16px 12px;border-bottom:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+}
+#sidebar-close{
+  width:32px;height:32px;border-radius:7px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--text);font-size:15px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+#sidebar-header .logo{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;
+  color:var(--c1);text-transform:uppercase;margin-bottom:4px;
+}
+#sidebar-header .title{font-size:13px;font-weight:700;line-height:1.3;}
+#toc-scroll{flex:1;overflow-y:auto;padding:8px 0 20px;-webkit-overflow-scrolling:touch;}
+.toc-group{padding:0 10px;margin-bottom:4px;}
+.toc-group-label{
+  font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--dim);padding:10px 8px 4px;
+}
+.toc-btn{
+  width:100%;display:flex;align-items:center;gap:8px;padding:10px 8px;
+  border-radius:7px;border:none;background:transparent;color:var(--dim);
+  font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;text-align:left;margin-bottom:1px;
+  transition:background .15s,color .15s;
+}
+.toc-btn:hover{background:var(--surface2);color:var(--text);}
+.toc-btn.active{background:rgba(56,189,248,.12);color:var(--c1);}
+.toc-btn .n{
+  font-family:'JetBrains Mono',monospace;font-size:9px;min-width:22px;
+  text-align:right;color:var(--border2);flex-shrink:0;
+}
+.toc-btn.active .n{color:var(--c1);opacity:.6;}
+.toc-btn .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.4;flex-shrink:0;}
+.toc-btn.active .dot{opacity:1;}
+#app-right{display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden;width:100%;}
+#topbar{
+  flex-shrink:0;height:50px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 14px 0 10px;
+  background:var(--surface);border-bottom:1px solid var(--border);gap:10px;
+}
+#topbar-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow:hidden;}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;
+  padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.05em;flex-shrink:0;
+}
+.chip-intro{background:rgba(255,255,255,.1);color:var(--text);}
+.chip-pre{background:rgba(74,222,128,.2);color:var(--c4);}
+.chip-t1{background:rgba(129,140,248,.2);color:var(--c2);}
+.chip-t2{background:rgba(251,146,60,.2);color:var(--c3);}
+.chip-t3{background:rgba(56,189,248,.2);color:var(--c1);}
+.chip-t4{background:rgba(250,204,21,.2);color:var(--c5);}
+.chip-ev{background:rgba(244,114,182,.2);color:var(--c6);}
+.chip-quiz{background:rgba(248,113,113,.2);color:var(--danger);}
+#topbar-title{
+  font-size:12px;font-weight:600;color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;
+}
+#topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+#prog-track{width:72px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+#prog-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--c4));border-radius:2px;transition:width .4s;}
+#slide-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);white-space:nowrap;}
+#menu-btn{
+  width:34px;height:34px;border-radius:7px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--text);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+#stage{flex:1;position:relative;overflow:hidden;background:var(--bg);min-height:0;}
+#stage::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.slide{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding:20px 18px 32px;
+  opacity:0;pointer-events:none;transform:translateX(24px);
+  transition:opacity .3s,transform .3s;
+}
+@media(min-width:769px){.slide{padding:28px 48px 40px;}}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0);}
+.slide.out{opacity:0;transform:translateX(-24px);}
+.slide h1{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:4px;}
+.slide h3{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--c1);
+  margin-bottom:8px;margin-top:14px;
+}
+.sh{display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.sh .chip{margin-top:5px;}
+.g2{display:grid;gap:12px;margin-bottom:14px;}
+.g3{display:grid;gap:12px;margin-bottom:14px;}
+.g4{display:grid;gap:12px;margin-bottom:14px;}
+@media(min-width:769px){
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g4{grid-template-columns:repeat(4,1fr);}
+}
+.card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:14px 16px;transition:border-color .2s;
+}
+.card:hover{border-color:var(--border2);}
+.card p,.card li{font-size:13px;line-height:1.65;color:var(--dim);}
+.card ul{padding-left:16px;}
+.card ul li{margin-bottom:4px;}
+.card h3{margin-top:0;}
+.al{border-left:3px solid var(--c1);}
+.ap{border-left:3px solid var(--c2);}
+.ao{border-left:3px solid var(--c3);}
+.ag{border-left:3px solid var(--c4);}
+.ay{border-left:3px solid var(--c5);}
+.apk{border-left:3px solid var(--c6);}
+.ad{border-left:3px solid var(--danger);}
+table{
+  width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;
+  display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+@media(min-width:769px){table{font-size:13px;}}
+th{
+  background:var(--surface3);padding:8px 12px;text-align:left;
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--dim);
+  border-bottom:1px solid var(--border2);letter-spacing:.05em;
+  text-transform:uppercase;white-space:nowrap;
+}
+td{padding:7px 12px;border-bottom:1px solid var(--border);color:var(--dim);line-height:1.55;}
+tr:last-child td{border-bottom:none;}
+td strong{color:var(--text);}
+code{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  background:rgba(0,0,0,.4);border:1px solid var(--border2);
+  padding:1px 5px;border-radius:3px;color:var(--c1);
+}
+.ib{
+  border-radius:8px;padding:12px 15px;margin:10px 0;font-size:13px;
+  line-height:1.65;color:var(--dim);
+  background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.2);
+}
+.ib strong{color:var(--text);}
+.ib.y{background:rgba(250,204,21,.05);border-color:rgba(250,204,21,.2);}
+.ib.p{background:rgba(129,140,248,.05);border-color:rgba(129,140,248,.2);}
+.ib.g{background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.2);}
+.ib.o{background:rgba(251,146,60,.05);border-color:rgba(251,146,60,.2);}
+.ib.d{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);}
+.ib.pk{background:rgba(244,114,182,.05);border-color:rgba(244,114,182,.2);}
+.co{
+  display:flex;gap:12px;padding:12px 15px;border-radius:8px;
+  background:var(--surface2);border:1px solid var(--border);margin:10px 0;
+}
+.co-icon{font-size:18px;flex-shrink:0;}
+.co-text{font-size:13px;color:var(--dim);line-height:1.65;}
+.co-text strong{color:var(--text);}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.tag{
+  font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:20px;
+  background:var(--surface3);border:1px solid var(--border2);color:var(--dim);
+}
+.tag.hi{background:rgba(74,222,128,.1);color:var(--c4);border-color:rgba(74,222,128,.3);}
+.tag.hi2{background:rgba(129,140,248,.1);color:var(--c2);border-color:rgba(129,140,248,.3);}
+.tag.hi3{background:rgba(251,146,60,.1);color:var(--c3);border-color:rgba(251,146,60,.3);}
+.tag.hi4{background:rgba(56,189,248,.1);color:var(--c1);border-color:rgba(56,189,248,.3);}
+.tag.hi5{background:rgba(250,204,21,.1);color:var(--c5);border-color:rgba(250,204,21,.3);}
+.tag.hi6{background:rgba(244,114,182,.1);color:var(--c6);border-color:rgba(244,114,182,.3);}
+.hero{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;min-height:calc(100dvh - 160px);gap:16px;padding:10px 0;
+}
+@media(min-width:769px){.hero{min-height:calc(100vh - 160px);gap:20px;}}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--c1);
+}
+.hero h1{
+  font-size:clamp(32px,6vw,58px);
+  background:linear-gradient(130deg,var(--text) 30%,var(--c1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:0;line-height:1.1;
+}
+.hero-sub{font-size:clamp(14px,2vw,17px);color:var(--dim);max-width:520px;line-height:1.6;}
+.hero-stats{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px;
+}
+.hstat{
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  padding:12px 18px;text-align:center;min-width:90px;
+}
+.hstat-n{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--c1);}
+.hstat-l{font-size:11px;color:var(--dim);margin-top:2px;}
+.nbtn{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 20px;
+  border-radius:9px;border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
+  cursor:pointer;transition:border-color .2s,background .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.nbtn:hover{border-color:var(--c1);background:rgba(56,189,248,.07);}
+.nbtn:disabled{opacity:.35;cursor:not-allowed;}
+#bottom-bar{
+  flex-shrink:0;height:52px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 14px;
+  background:var(--surface);border-top:1px solid var(--border);gap:12px;
+}
+#dots{display:flex;gap:6px;align-items:center;justify-content:center;flex:1;}
+.sdot{
+  width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.sdot.act{background:var(--c1);transform:scale(1.5);}
+/* Quiz styles */
+.qbox{
+  background:var(--surface2);border:1px solid var(--border);border-radius:12px;
+  padding:18px 18px 14px;margin-bottom:16px;
+}
+.q-meta{
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:10px;
+}
+.q-text{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:14px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{
+  display:flex;align-items:center;gap:10px;padding:10px 13px;
+  border-radius:8px;border:1px solid var(--border);background:var(--surface3);
+  color:var(--dim);font-family:'Outfit',sans-serif;font-size:13px;
+  cursor:pointer;text-align:left;transition:border-color .15s,background .15s,color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.opt:hover:not(.dis){border-color:var(--c1);background:rgba(56,189,248,.07);color:var(--text);}
+.opt-let{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  min-width:18px;height:18px;border-radius:4px;background:var(--border2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.opt.cor{border-color:var(--c4);background:rgba(74,222,128,.1);color:var(--c4);}
+.opt.cor .opt-let{background:var(--c4);color:#000;}
+.opt.wrg{border-color:var(--danger);background:rgba(248,113,113,.1);color:var(--danger);}
+.opt.wrg .opt-let{background:var(--danger);color:#000;}
+.opt.dis{cursor:not-allowed;opacity:.8;}
+.fb{
+  font-size:12.5px;line-height:1.65;padding:10px 12px;border-radius:7px;
+  margin-top:10px;display:none;
+}
+.fb.show{display:block;}
+.fb.cor{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);color:var(--dim);}
+.fb.wrg{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);color:var(--dim);}
+.fb strong{color:var(--text);}
+.score-wrap{
+  background:var(--surface2);border:1px solid var(--border);border-radius:14px;
+  padding:28px 22px;text-align:center;max-width:560px;margin:0 auto;
+}
+.score-pct{font-size:clamp(52px,10vw,80px);font-weight:800;line-height:1;}
+.score-sub{font-size:14px;color:var(--dim);margin-top:6px;}
+.score-msg{font-size:14px;color:var(--dim);margin:14px 0;line-height:1.6;}
+.score-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
+  margin:18px 0;text-align:left;
+}
+@media(min-width:600px){.score-grid{grid-template-columns:repeat(3,1fr);}}
+.sc-item{
+  background:var(--surface3);border:1px solid var(--border);border-radius:8px;
+  padding:10px 12px;
+}
+.sc-item .n{font-size:20px;font-weight:800;line-height:1;}
+.sc-item .l{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.4;}
+.sc-item .s{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--border2);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
+.ao-bar{
+  display:flex;align-items:center;gap:10px;margin-bottom:9px;
+}
+.ao-label{font-size:13px;font-weight:600;min-width:28px;flex-shrink:0;}
+.ao-track{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+.ao-fill{height:100%;border-radius:4px;}
+.ao-pct{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);min-width:30px;text-align:right;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div id="sidebar">
+  <div id="sidebar-header">
+    <div>
+      <div class="logo">ESP · T Level DSD</div>
+      <div class="title">Employer Set Project<br>Revision Deck</div>
+    </div>
+    <button id="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <div id="toc-scroll"></div>
+</div>
+
+<div id="app-right">
+  <div id="topbar">
+    <div id="topbar-left">
+      <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+      <span class="chip chip-intro" id="top-chip">INTRO</span>
+      <span id="topbar-title">Employer Set Project</span>
+    </div>
+    <div id="topbar-right">
+      <div id="prog-track"><div id="prog-fill" style="width:0%"></div></div>
+      <span id="slide-num">1/24</span>
+    </div>
+  </div>
+
+  <div id="stage">
+
+    <!-- ===== SLIDE 0: HERO ===== -->
+    <div class="slide active" id="s0">
+      <div class="hero">
+        <div class="hero-eyebrow">T Level Digital Software Development</div>
+        <h1>Employer Set Project</h1>
+        <p class="hero-sub">A synoptic assessed project worth 40% of your core marks. You'll plan, debug, design, develop and evaluate a real-world software solution.</p>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n">14.5h</div><div class="hstat-l">Total time</div></div>
+          <div class="hstat"><div class="hstat-n">100</div><div class="hstat-l">Total marks</div></div>
+          <div class="hstat"><div class="hstat-n">40%</div><div class="hstat-l">Of core assessments</div></div>
+          <div class="hstat"><div class="hstat-n">5</div><div class="hstat-l">Tasks</div></div>
+        </div>
+        <button class="nbtn" onclick="go(1)">Start Revision →</button>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 1: ESP AT A GLANCE ===== -->
+    <div class="slide" id="s1">
+      <div class="sh"><h1>ESP at a Glance</h1><span class="chip chip-intro">OVERVIEW</span></div>
+      <div class="ib"><strong>📋 What is the ESP?</strong> The Employer Set Project is an externally assessed, synoptic project. You work under supervised conditions to respond to a realistic industry brief — validated by an employer panel. Internet access is <strong>NOT</strong> permitted. AI tools are <strong>NOT</strong> permitted during the assessment.</div>
+      <h3>The Five Tasks</h3>
+      <table>
+        <thead><tr><th>Task</th><th>What you produce</th><th>Marks focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pre-task</strong></td><td>Research notes (not assessed)</td><td>—</td></tr>
+          <tr><td><strong>Task 1</strong></td><td>Gantt chart, resource/cost plan, rationale</td><td>Planning</td></tr>
+          <tr><td><strong>Task 2</strong></td><td>Test documentation + fixed code</td><td>Application</td></tr>
+          <tr><td><strong>Task 3</strong></td><td>Decomposition diagrams, algorithms, design doc</td><td>Application + Techniques</td></tr>
+          <tr><td><strong>Task 4a</strong></td><td>Working software solution</td><td>Project outcome</td></tr>
+          <tr><td><strong>Task 4b</strong></td><td>Reflective evaluation</td><td>Review</td></tr>
+        </tbody>
+      </table>
+      <div class="ib y"><strong>⚠️ Key rules:</strong> Supervised conditions. No internet. No AI tools. Portfolio of evidence submitted electronically. Set and marked by Pearson.</div>
+      <h3>Portfolio Contents</h3>
+      <div class="tags">
+        <span class="tag hi">Planning documentation</span>
+        <span class="tag hi2">Annotated digital portfolio</span>
+        <span class="tag hi3">Prototype digital product</span>
+        <span class="tag hi4">Testing evidence</span>
+        <span class="tag hi5">Evaluation</span>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 2: ASSESSMENT OBJECTIVES ===== -->
+    <div class="slide" id="s2">
+      <div class="sh"><h1>Assessment Objectives</h1><span class="chip chip-intro">OVERVIEW</span></div>
+      <div class="ib"><strong>Five AOs determine your mark.</strong> AO2 (Application) is the biggest — focus your revision on actually doing things, not just knowing them.</div>
+      <h3>Mark Breakdown</h3>
+      <div class="ao-bar"><span class="ao-label" style="color:var(--c2)">AO1</span><div class="ao-track"><div class="ao-fill" style="width:12%;background:var(--c2)"></div></div><span class="ao-pct">12%</span></div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Planning</strong> — Plan an approach to solving problems in response to a brief.</div>
+      <div class="ao-bar"><span class="ao-label" style="color:var(--c3)">AO2</span><div class="ao-track"><div class="ao-fill" style="width:41%;background:var(--c3)"></div></div><span class="ao-pct">41%</span></div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Application</strong> — Develop software, create an artefact, fix defects and mitigate security risks.</div>
+      <div class="ao-bar"><span class="ao-label" style="color:var(--c1)">AO3</span><div class="ao-track"><div class="ao-fill" style="width:9%;background:var(--c1)"></div></div><span class="ao-pct">9%</span></div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Selecting Techniques & Resources</strong> — Select relevant tools and work collaboratively.</div>
+      <div class="ao-bar"><span class="ao-label" style="color:var(--c4)">AO4</span><div class="ao-track"><div class="ao-fill" style="width:3%;background:var(--c4);min-width:6px"></div></div><span class="ao-pct">3%</span></div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">English, Maths & Digital Skills</strong> — Communicate technical info to technical and non-technical audiences.</div>
+      <div class="ao-bar"><span class="ao-label" style="color:var(--c5)">AO5</span><div class="ao-track"><div class="ao-fill" style="width:35%;background:var(--c5)"></div></div><span class="ao-pct">35%</span></div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Project Outcome + Review</strong> — Produce software/artefacts (26%) and reflective evaluation (9%).</div>
+      <div class="ib g"><strong>💡 Revision strategy:</strong> AO2 (41%) + AO5 (35%) = 76% of marks. These reward <em>doing</em>: fixing real code, writing working software, and evaluating honestly. Spend most of your time practising these skills.</div>
+    </div>
+
+    <!-- ===== SLIDE 3: PRE-TASK ===== -->
+    <div class="slide" id="s3">
+      <div class="sh"><h1>Pre-task: Familiarisation</h1><span class="chip chip-pre">PRE-TASK</span></div>
+      <div class="ib g"><strong>🔍 Purpose:</strong> The pre-task lets you familiarise yourself with the industry context of the main brief — for example, the use of digital solutions in the financial sector.</div>
+      <h3>What You Do</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>Activities</h3>
+          <ul>
+            <li>Carry out independent research into the given sector</li>
+            <li>Share findings with others, work in groups</li>
+            <li>Communicate with peers and lead discussions</li>
+            <li>Investigate existing digital solutions</li>
+          </ul>
+        </div>
+        <div class="card ay">
+          <h3>Research Areas</h3>
+          <ul>
+            <li>Common problems and risks in the sector</li>
+            <li>Current uses of hardware and software</li>
+            <li>Newly emerging technologies</li>
+            <li>Industry-specific guidelines and regulations</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Key Rules</h3>
+      <div class="co"><span class="co-icon">⚠️</span><div class="co-text"><strong>NOT directly assessed</strong> — the pre-task has no marks attached and is NOT taken under controlled conditions.</div></div>
+      <div class="co"><span class="co-icon">✅</span><div class="co-text"><strong>Can be used</strong> — you may use your pre-task research notes to inform your responses in the assessed tasks.</div></div>
+      <div class="ib y"><strong>Exam tip:</strong> Use the pre-task to build genuine familiarity with the sector (e.g. fintech, healthcare). Your understanding of the <em>context</em> will improve the quality of your rationale in Task 1 and your evaluation in Task 4b.</div>
+    </div>
+
+    <!-- ===== SLIDE 4: TASK 1 OVERVIEW ===== -->
+    <div class="slide" id="s4">
+      <div class="sh"><h1>Task 1: Planning a Project</h1><span class="chip chip-t1">TASK 1 · PLANNING</span></div>
+      <div class="ib p"><strong>🗂️ AO1 — Planning (12% of total marks)</strong> You use a provided template to create a complete project plan, including a Gantt chart, a resource and cost plan, and a written rationale.</div>
+      <h3>Three Deliverables</h3>
+      <div class="g3">
+        <div class="card ap">
+          <h3>📅 Gantt Chart</h3>
+          <p>A visual schedule showing tasks, durations, dependencies, team member assignments, and milestones across the project timeline.</p>
+        </div>
+        <div class="card al">
+          <h3>💰 Resource & Cost Plan</h3>
+          <p>Lists all resources (people, equipment, materials) with associated costs. Must show total project cost and assess affordability.</p>
+        </div>
+        <div class="card ao">
+          <h3>✍️ Rationale</h3>
+          <p>A written justification of the key decisions made in your plan — order of tasks, team allocation, risk considerations, cost impacts.</p>
+        </div>
+      </div>
+      <h3>SDLC Connection</h3>
+      <p style="font-size:13px;color:var(--dim);line-height:1.65">Task 1 maps to the <strong style="color:var(--text)">Planning & Requirements Analysis</strong> lifecycle stage. You must use an appropriate software development lifecycle (Agile, Waterfall, RAD, Lean, Scaled Agile) to organise your project tasks efficiently.</p>
+      <div class="tags">
+        <span class="tag hi2">Agile / Scrum</span>
+        <span class="tag">Waterfall</span>
+        <span class="tag hi3">RAD</span>
+        <span class="tag hi5">Lean</span>
+        <span class="tag hi2">Scaled Agile</span>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 5: GANTT CHARTS ===== -->
+    <div class="slide" id="s5">
+      <div class="sh"><h1>Gantt Charts in Depth</h1><span class="chip chip-t1">TASK 1 · PLANNING</span></div>
+      <h3>What the Spec Requires</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>People & Tasks</h3>
+          <ul>
+            <li>Assess strengths and skills of team members</li>
+            <li>Assign appropriate tasks to appropriate people</li>
+            <li>Demonstrate resource allocation correctly</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>Scheduling</h3>
+          <ul>
+            <li>Make scheduling decisions in response to a defined deadline</li>
+            <li>Prioritise activities based on analysis of requirements</li>
+            <li>Use an SDLC to efficiently organise tasks</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Key Gantt Terminology</h3>
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Task / Activity</strong></td><td>A unit of work with a start date, duration, and assignee</td></tr>
+          <tr><td><strong>Milestone</strong></td><td>A key checkpoint with zero duration (e.g. "Design approved")</td></tr>
+          <tr><td><strong>Dependency</strong></td><td>A task that must complete before another can start</td></tr>
+          <tr><td><strong>Critical path</strong></td><td>The sequence of tasks that determines the minimum project duration</td></tr>
+          <tr><td><strong>Resource levelling</strong></td><td>Adjusting the schedule to avoid over-allocating any one person</td></tr>
+          <tr><td><strong>Baseline</strong></td><td>The original planned schedule used to measure progress</td></tr>
+        </tbody>
+      </table>
+      <div class="ib y"><strong>⚠️ Common mistake:</strong> Students often list tasks without showing dependencies. Make sure your Gantt shows which tasks must be completed <em>before</em> others can begin.</div>
+    </div>
+
+    <!-- ===== SLIDE 6: RESOURCE & COST PLAN ===== -->
+    <div class="slide" id="s6">
+      <div class="sh"><h1>Resource & Cost Plan</h1><span class="chip chip-t1">TASK 1 · PLANNING</span></div>
+      <div class="ib p"><strong>📋 Purpose:</strong> Identify and calculate all project costs, then determine whether the project is affordable and viable for the client over time.</div>
+      <h3>Three Cost Categories</h3>
+      <div class="g3">
+        <div class="card ag">
+          <h3>🧱 Materials</h3>
+          <p>Software licences, development tools, frameworks, APIs, cloud service subscriptions, stock images/assets used in the project.</p>
+        </div>
+        <div class="card al">
+          <h3>💻 Physical Resources</h3>
+          <p>Hardware, servers, workstations, networking equipment, testing devices (mobile, tablet). Include depreciation where relevant.</p>
+        </div>
+        <div class="card ao">
+          <h3>👥 Personnel</h3>
+          <p>Team members' time (day rates or hourly rates × hours allocated). Include project manager, developers, testers, UX designers.</p>
+        </div>
+      </div>
+      <h3>Beyond the Numbers</h3>
+      <div class="g2">
+        <div class="card ay">
+          <h3>Affordability</h3>
+          <p>Can the client actually pay for this? Compare total project cost against client budget. Identify any cost savings or value-engineering options.</p>
+        </div>
+        <div class="card ad">
+          <h3>Viability Over Time</h3>
+          <p>What are the ongoing costs after go-live? Maintenance, support, licence renewals, server hosting. Does the solution provide value long-term?</p>
+        </div>
+      </div>
+      <div class="ib"><strong>Exam tip:</strong> To hit higher marks, don't just list costs — <em>justify</em> them. Explain why you chose a particular resource and what its cost impact is on the project timeline.</div>
+    </div>
+
+    <!-- ===== SLIDE 7: RATIONALE ===== -->
+    <div class="slide" id="s7">
+      <div class="sh"><h1>Rationale</h1><span class="chip chip-t1">TASK 1 · PLANNING</span></div>
+      <div class="ib p"><strong>✍️ The rationale is your written justification</strong> of the most significant planning decisions you made. It shows the examiner that you've thought critically, not just filled in a template.</div>
+      <h3>Four Areas to Justify</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>⏱ Order & Timing of Tasks</h3>
+          <p>Why did you schedule tasks in this order? What dependencies drove your decisions? How did you handle overlapping work?</p>
+        </div>
+        <div class="card ap">
+          <h3>👥 Allocation of Team Members</h3>
+          <p>Why did you assign specific people to specific tasks? How do their skills match the task requirements?</p>
+        </div>
+        <div class="card ag">
+          <h3>⚖️ Benefits & Risks</h3>
+          <p>What are the potential risks of your plan? How have you mitigated them? What are the benefits of your approach?</p>
+        </div>
+        <div class="card ao">
+          <h3>💸 Impact on Timings & Costs</h3>
+          <p>How do your decisions affect the overall timeline and budget? What trade-offs did you make?</p>
+        </div>
+      </div>
+      <div class="ib g"><strong>📝 High-mark tip:</strong> Use connective phrases like <em>"I assigned [person] to [task] because their experience in X means..."</em> and <em>"This scheduling decision reduces risk because..."</em> — examiners reward explicit, reasoned justification.</div>
+    </div>
+
+    <!-- ===== SLIDE 8: QUIZ TASK 1 ===== -->
+    <div class="slide" id="s8">
+      <div class="sh"><h1>Quiz: Task 1 — Planning</h1><span class="chip chip-quiz">QUIZ</span></div>
+      <div id="qt1"></div>
+    </div>
+
+    <!-- ===== SLIDE 9: TASK 2 OVERVIEW ===== -->
+    <div class="slide" id="s9">
+      <div class="sh"><h1>Task 2: Testing & Debugging</h1><span class="chip chip-t2">TASK 2 · TESTING</span></div>
+      <div class="ib o"><strong>🐛 AO2 — Application.</strong> You are given existing code with defects. You must assess it against the requirements, carry out testing, document the process, and fix the errors.</div>
+      <h3>Three Parts to Task 2</h3>
+      <div class="g3">
+        <div class="card ao">
+          <h3>1. Identify Defects</h3>
+          <p>Assess the given code against its requirements. Run it, read it, and identify where it fails.</p>
+        </div>
+        <div class="card al">
+          <h3>2. Document Testing</h3>
+          <p>Create annotated testing evidence: purpose, test data, expected results, actual results, comparison, and further actions.</p>
+        </div>
+        <div class="card ap">
+          <h3>3. Fix the Code</h3>
+          <p>Correct errors and add/remove code to make it functional. Follow programming conventions and justify every decision.</p>
+        </div>
+      </div>
+      <h3>Programming Conventions Required</h3>
+      <div class="tags">
+        <span class="tag hi3">Precise logic</span>
+        <span class="tag hi3">Correct indentation</span>
+        <span class="tag hi3">Meaningful variable names</span>
+        <span class="tag hi3">Consistent commenting</span>
+        <span class="tag hi3">Correct output</span>
+      </div>
+      <div class="ib y"><strong>Remember:</strong> You must <em>justify</em> decisions made when fixing defects. Don't just change the code — explain in your annotations WHY you made each change.</div>
+    </div>
+
+    <!-- ===== SLIDE 10: TEST DATA TYPES ===== -->
+    <div class="slide" id="s10">
+      <div class="sh"><h1>Test Data Types</h1><span class="chip chip-t2">TASK 2 · TESTING</span></div>
+      <div class="ib o"><strong>Five types of test data</strong> must be used and documented. For example, if testing a field that accepts ages 0–120:</div>
+      <table>
+        <thead><tr><th>Type</th><th>Definition</th><th>Example (age 0–120)</th><th>Expected</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Valid</strong></td><td>Data within the accepted range</td><td>25</td><td>Accepted ✅</td></tr>
+          <tr><td><strong>Valid Extreme</strong></td><td>Data at the boundaries of the valid range</td><td>0 or 120</td><td>Accepted ✅</td></tr>
+          <tr><td><strong>Invalid</strong></td><td>Data outside the valid range but correct type</td><td>-5 or 200</td><td>Rejected ❌</td></tr>
+          <tr><td><strong>Invalid Extreme</strong></td><td>Data just beyond the boundary</td><td>-1 or 121</td><td>Rejected ❌</td></tr>
+          <tr><td><strong>Erroneous</strong></td><td>Completely wrong data type</td><td>"hello" or @£$</td><td>Error handled 🛡️</td></tr>
+        </tbody>
+      </table>
+      <h3>Complete Test Table Structure</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>Before Testing</h3>
+          <ul>
+            <li>Test ID / name</li>
+            <li>Purpose of the test</li>
+            <li>Test data to be used</li>
+            <li>Expected results</li>
+            <li>Pre-requisites</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>After Testing</h3>
+          <ul>
+            <li>Actual results</li>
+            <li>Comparison (pass / fail)</li>
+            <li>Further actions required</li>
+            <li>Changes made</li>
+            <li>Re-test / regression test</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 11: FIXING CODE ===== -->
+    <div class="slide" id="s11">
+      <div class="sh"><h1>Fixing the Code</h1><span class="chip chip-t2">TASK 2 · TESTING</span></div>
+      <div class="ib o"><strong>The solution:</strong> Correct errors and add/remove code to ensure the given code is fully functional and meets the stated requirements.</div>
+      <h3>Common Defect Types</h3>
+      <div class="g2">
+        <div class="card ao">
+          <h3>Syntax Errors</h3>
+          <p>Code that violates the rules of the language (e.g. missing colon, wrong indentation in Python, mismatched brackets). The program won't run at all.</p>
+        </div>
+        <div class="card ad">
+          <h3>Logic Errors</h3>
+          <p>Code that runs but produces wrong output (e.g. <code>&gt;</code> instead of <code>&gt;=</code>, wrong calculation, loop runs too many/few times).</p>
+        </div>
+        <div class="card al">
+          <h3>Runtime Errors</h3>
+          <p>Code that crashes during execution (e.g. dividing by zero, accessing an index that doesn't exist, calling a function that doesn't exist).</p>
+        </div>
+        <div class="card ap">
+          <h3>Requirement Errors</h3>
+          <p>Code that runs without errors but does not meet the specification (e.g. wrong output format, missing validation, incorrect feature).</p>
+        </div>
+      </div>
+      <h3>Good Fixing Annotations Include</h3>
+      <div class="co"><span class="co-icon">💬</span><div class="co-text"><strong>Before:</strong> Quote the original buggy line or section. <strong>After:</strong> Show your corrected version. <strong>Why:</strong> Explain your reasoning — "I changed <code>&lt;</code> to <code>&lt;=</code> because the boundary value 0 should be accepted as valid."</div></div>
+      <div class="ib g"><strong>Defensive programming tip:</strong> When fixing, also consider edge cases. Add input validation, exception handling, and meaningful error messages where the original code lacked them.</div>
+    </div>
+
+    <!-- ===== SLIDE 12: QUIZ TASK 2 ===== -->
+    <div class="slide" id="s12">
+      <div class="sh"><h1>Quiz: Task 2 — Testing</h1><span class="chip chip-quiz">QUIZ</span></div>
+      <div id="qt2"></div>
+    </div>
+
+    <!-- ===== SLIDE 13: TASK 3 OVERVIEW ===== -->
+    <div class="slide" id="s13">
+      <div class="sh"><h1>Task 3: Designing a Solution</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
+      <div class="ib"><strong>🎨 AO2 + AO3.</strong> You break down the problem, design algorithms, follow conventions, and produce documentation detailed enough for a third party to build the solution.</div>
+      <h3>Three Design Requirements</h3>
+      <div class="g3">
+        <div class="card al">
+          <h3>1. Decomposition</h3>
+          <p>Break the problem into smaller computational parts. Use abstraction, show reusable components, identify all sub-systems.</p>
+        </div>
+        <div class="card ap">
+          <h3>2. Algorithm Design</h3>
+          <p>Describe each part using algorithms. Must include sequence, selection and iteration. Use flowcharts or pseudocode with correct conventions.</p>
+        </div>
+        <div class="card ao">
+          <h3>3. Design Communication</h3>
+          <p>Produce documents clear enough for the client to make decisions AND for a third party to build the solution from.</p>
+        </div>
+      </div>
+      <h3>Design Tools You Might Use</h3>
+      <div class="tags">
+        <span class="tag hi4">Flowcharts (BCS symbols)</span>
+        <span class="tag hi2">Pseudocode</span>
+        <span class="tag hi3">Wireframes</span>
+        <span class="tag hi">ERD / Data Dictionary</span>
+        <span class="tag hi5">UML Class Diagrams</span>
+        <span class="tag hi4">Data Flow Diagrams</span>
+      </div>
+      <div class="ib y"><strong>💡 Key:</strong> Use a combination of written and diagrammatical presentation. Pure text or pure diagrams alone will limit your marks.</div>
+    </div>
+
+    <!-- ===== SLIDE 14: DECOMPOSITION & ALGORITHMS ===== -->
+    <div class="slide" id="s14">
+      <div class="sh"><h1>Decomposition & Algorithms</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
+      <h3>Decomposition Principles</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>Break It Down</h3>
+          <ul>
+            <li>Identify all sub-systems that make up the solution</li>
+            <li>Show how sub-systems connect and interact</li>
+            <li>Each part should be solvable computationally</li>
+            <li>Justify decisions about how you split the problem</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>Abstraction & Reuse</h3>
+          <ul>
+            <li>Remove unnecessary detail — focus on what matters</li>
+            <li>Identify reusable components (functions, modules)</li>
+            <li>Make effective use of detailed abstraction and refinement</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Algorithm Design Requirements</h3>
+      <table>
+        <thead><tr><th>Requirement</th><th>What it means</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Clearly define steps</strong></td><td>Every step unambiguously specifies an action</td><td>Set total = 0, not "add up numbers"</td></tr>
+          <tr><td><strong>Uniquely defined</strong></td><td>Each step depends on input and result of previous steps</td><td>Steps follow logically, no ambiguity</td></tr>
+          <tr><td><strong>Sequence</strong></td><td>Steps execute in order</td><td>Input → Process → Output</td></tr>
+          <tr><td><strong>Selection</strong></td><td>Conditional branching (IF/ELSE)</td><td>IF age &gt;= 18 THEN…</td></tr>
+          <tr><td><strong>Iteration</strong></td><td>Repeating a block of code (FOR/WHILE)</td><td>WHILE balance &gt; 0…</td></tr>
+        </tbody>
+      </table>
+      <div class="ib"><strong>Flowchart reminder:</strong> Use correct BCS symbols — parallelogram for I/O, rectangle for process, diamond for decision, oval for start/end. Incorrect symbols lose marks.</div>
+    </div>
+
+    <!-- ===== SLIDE 15: DESIGN COMMUNICATION ===== -->
+    <div class="slide" id="s15">
+      <div class="sh"><h1>Design Communication</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
+      <div class="ib"><strong>📄 Threshold:</strong> Your design documents must be detailed enough that a third party who has never seen the brief could use them alone to build the proposed solution.</div>
+      <h3>Three Audiences to Satisfy</h3>
+      <div class="g3">
+        <div class="card al">
+          <h3>👤 The Client</h3>
+          <p>Needs enough detail to make informed decisions about the solution. Use plain language and diagrams they can understand.</p>
+        </div>
+        <div class="card ap">
+          <h3>🔨 Third Party Developer</h3>
+          <p>Must be able to build the solution from your documentation alone. Needs precise technical detail, data structures, and algorithm logic.</p>
+        </div>
+        <div class="card ao">
+          <h3>📋 Examiner</h3>
+          <p>Assesses whether your design is clear, complete, and professional. Rewards use of technical vocabulary and consideration of audience.</p>
+        </div>
+      </div>
+      <h3>What Good Design Documentation Contains</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>Written Elements</h3>
+          <ul>
+            <li>Explanation of structures and processes</li>
+            <li>Appropriate technical vocabulary</li>
+            <li>Justification of design decisions</li>
+            <li>Consideration of the audience</li>
+          </ul>
+        </div>
+        <div class="card ay">
+          <h3>Diagrammatical Elements</h3>
+          <ul>
+            <li>Flowcharts using standard BCS symbols</li>
+            <li>Pseudocode with correct notation</li>
+            <li>Wireframes / UI mockups</li>
+            <li>ERDs, class diagrams, data flow diagrams</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 16: QUIZ TASK 3 ===== -->
+    <div class="slide" id="s16">
+      <div class="sh"><h1>Quiz: Task 3 — Design</h1><span class="chip chip-quiz">QUIZ</span></div>
+      <div id="qt3"></div>
+    </div>
+
+    <!-- ===== SLIDE 17: TASK 4a OVERVIEW ===== -->
+    <div class="slide" id="s17">
+      <div class="sh"><h1>Task 4a: Developing a Solution</h1><span class="chip chip-t4">TASK 4A · DEVELOPMENT</span></div>
+      <div class="ib y"><strong>⚙️ AO2 + AO5.</strong> Apply your programming skills to develop a working solution that meets the brief requirements. Use your Task 3 design as the blueprint.</div>
+      <h3>What the Spec Requires</h3>
+      <div class="g2">
+        <div class="card ay">
+          <h3>Technical Skill</h3>
+          <ul>
+            <li>Demonstrate appropriate programming techniques</li>
+            <li>Use pre-written and user-written modules</li>
+            <li>Appropriate use of interfaces between modules</li>
+            <li>Refine the system as required during development</li>
+          </ul>
+        </div>
+        <div class="card al">
+          <h3>Problem Solving</h3>
+          <ul>
+            <li>Show understanding of programming concepts</li>
+            <li>Apply computational thinking (decomp, abstraction)</li>
+            <li>Handle edge cases and unexpected input</li>
+            <li>Produce consistently correct outcomes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib g"><strong>Note:</strong> Formal test documentation is NOT required in Task 4a — but testing should still take place implicitly. Evidence of testing is a working product that meets the brief requirements.</div>
+      <h3>Languages You Can Use</h3>
+      <div class="tags">
+        <span class="tag hi">Python 3.10+</span>
+        <span class="tag hi2">C#</span>
+        <span class="tag hi3">SQL</span>
+        <span class="tag hi4">JavaScript</span>
+        <span class="tag hi5">PHP</span>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 18: CODE ORGANISATION ===== -->
+    <div class="slide" id="s18">
+      <div class="sh"><h1>Code Organisation</h1><span class="chip chip-t4">TASK 4A · DEVELOPMENT</span></div>
+      <div class="ib y"><strong>💻 The specification lists explicit code quality requirements.</strong> Meeting these separates a pass from a merit/distinction.</div>
+      <h3>Required Code Quality Principles</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>Structure</h3>
+          <ul>
+            <li>Clear, meaningful indentation throughout</li>
+            <li>Avoid deeply nested if-clauses and loops</li>
+            <li>Use functions/classes/objects with proper structure</li>
+            <li>Consistent style throughout the whole solution</li>
+          </ul>
+        </div>
+        <div class="card al">
+          <h3>Documentation</h3>
+          <ul>
+            <li>Comments wherever possible to explain logic</li>
+            <li>Meaningful variable, function, and class names</li>
+            <li>Use of constants for fixed values</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>Variables</h3>
+          <ul>
+            <li>Good use of local variables</li>
+            <li>Minimal use of global variables</li>
+            <li>No copy-pasted procedural code</li>
+          </ul>
+        </div>
+        <div class="card ad">
+          <h3>Security & Robustness</h3>
+          <ul>
+            <li>Defensive programming throughout</li>
+            <li>Handle data securely</li>
+            <li>Good exception handling (try/except)</li>
+          </ul>
+        </div>
+      </div>
+      <h3>User Experience Requirements</h3>
+      <div class="co"><span class="co-icon">🖥️</span><div class="co-text">Consistency · Simplified user input · Meaningful output messages · Explanation of what to input · Error messages · Data visualisation (e.g. <strong>Matplotlib</strong> graphs)</div></div>
+    </div>
+
+    <!-- ===== SLIDE 19: TASK 4b EVALUATION ===== -->
+    <div class="slide" id="s19">
+      <div class="sh"><h1>Task 4b: Reflective Evaluation</h1><span class="chip chip-ev">TASK 4B · EVALUATION</span></div>
+      <div class="ib pk"><strong>📝 AO5b — Review (9% of total marks).</strong> Apply reflection and evaluation techniques. Show you can honestly assess your own work and identify improvements.</div>
+      <h3>Three Parts of the Evaluation</h3>
+      <div class="g3">
+        <div class="card apk">
+          <h3>1. Evidence of Success</h3>
+          <p>Demonstrate that your product meets the brief requirements. Include specific measures against the success criteria listed in the brief.</p>
+        </div>
+        <div class="card al">
+          <h3>2. User Needs</h3>
+          <p>Provide evidence from testing that the product meets user needs. Reference actual test results and user feedback where possible.</p>
+        </div>
+        <div class="card ap">
+          <h3>3. Improvements</h3>
+          <p>Discuss how the solution could be improved if you revisited the problem. Be specific — say what you would do differently and why.</p>
+        </div>
+      </div>
+      <h3>High-Mark Evaluation Language</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>✅ Do Say</h3>
+          <ul>
+            <li>"The product meets criterion X because [evidence]…"</li>
+            <li>"Testing showed that when [input], the output was [result], which confirms…"</li>
+            <li>"If I revisited this, I would improve [X] by [specific action] because…"</li>
+          </ul>
+        </div>
+        <div class="card ad">
+          <h3>❌ Avoid</h3>
+          <ul>
+            <li>Vague statements: "I think it went well"</li>
+            <li>Listing features without linking to the brief</li>
+            <li>"I would add more features" without specifics</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib g"><strong>Reflection vs Evaluation:</strong> Reflection asks "what happened?" — Evaluation asks "how well did it meet requirements and what could be better?" Aim for evaluation, not just description.</div>
+    </div>
+
+    <!-- ===== SLIDE 20: QUIZ TASK 4 ===== -->
+    <div class="slide" id="s20">
+      <div class="sh"><h1>Quiz: Tasks 4a & 4b</h1><span class="chip chip-quiz">QUIZ</span></div>
+      <div id="qt4"></div>
+    </div>
+
+    <!-- ===== SLIDE 21: MEGA QUIZ ===== -->
+    <div class="slide" id="s21">
+      <div class="sh"><h1>Mega Quiz — All Tasks</h1><span class="chip chip-quiz">MEGA QUIZ</span></div>
+      <div class="ib d"><strong>🔥 Final challenge:</strong> Questions spanning all five tasks and assessment objectives. Good luck!</div>
+      <div id="qmega"></div>
+    </div>
+
+    <!-- ===== SLIDE 22: FINAL SCORE ===== -->
+    <div class="slide" id="s22">
+      <div class="sh"><h1>Your Results</h1><span class="chip chip-quiz">SCORE</span></div>
+      <div id="qfinal"></div>
+    </div>
+
+  </div><!-- /stage -->
+
+  <div id="bottom-bar">
+    <button class="nbtn" id="btn-prev" onclick="go(-1)" disabled>← Prev</button>
+    <div id="dots"></div>
+    <button class="nbtn" id="btn-next" onclick="go(1)">Next →</button>
+  </div>
+</div><!-- /app-right -->
+
+<script>
+const SLIDES=[
+  {id:'s0', label:'Introduction',           group:'OVERVIEW',        chip:'chip-intro', chipText:'INTRO'},
+  {id:'s1', label:'ESP at a Glance',        group:'OVERVIEW',        chip:'chip-intro', chipText:'OVERVIEW'},
+  {id:'s2', label:'Assessment Objectives',  group:'OVERVIEW',        chip:'chip-intro', chipText:'OVERVIEW'},
+  {id:'s3', label:'Pre-task: Familiarisation', group:'PRE-TASK',     chip:'chip-pre',   chipText:'PRE-TASK'},
+  {id:'s4', label:'Task 1 Overview',        group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
+  {id:'s5', label:'Gantt Charts in Depth',  group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
+  {id:'s6', label:'Resource & Cost Plan',   group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
+  {id:'s7', label:'Rationale',              group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
+  {id:'s8', label:'Quiz: Task 1 Planning',  group:'TASK 1 · PLANNING', chip:'chip-quiz', chipText:'QUIZ'},
+  {id:'s9', label:'Task 2 Overview',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
+  {id:'s10',label:'Test Data Types',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
+  {id:'s11',label:'Fixing the Code',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
+  {id:'s12',label:'Quiz: Task 2 Testing',   group:'TASK 2 · TESTING', chip:'chip-quiz', chipText:'QUIZ'},
+  {id:'s13',label:'Task 3 Overview',        group:'TASK 3 · DESIGN',  chip:'chip-t3', chipText:'TASK 3'},
+  {id:'s14',label:'Decomposition & Algorithms', group:'TASK 3 · DESIGN', chip:'chip-t3', chipText:'TASK 3'},
+  {id:'s15',label:'Design Communication',   group:'TASK 3 · DESIGN',  chip:'chip-t3', chipText:'TASK 3'},
+  {id:'s16',label:'Quiz: Task 3 Design',    group:'TASK 3 · DESIGN',  chip:'chip-quiz', chipText:'QUIZ'},
+  {id:'s17',label:'Task 4a: Development',   group:'TASK 4 · DEVELOP', chip:'chip-t4', chipText:'TASK 4A'},
+  {id:'s18',label:'Code Organisation',      group:'TASK 4 · DEVELOP', chip:'chip-t4', chipText:'TASK 4A'},
+  {id:'s19',label:'Task 4b: Evaluation',    group:'TASK 4B · EVALUATION', chip:'chip-ev', chipText:'TASK 4B'},
+  {id:'s20',label:'Quiz: Tasks 4a & 4b',    group:'TASK 4B · EVALUATION', chip:'chip-quiz', chipText:'QUIZ'},
+  {id:'s21',label:'Mega Quiz — All Tasks',  group:'MEGA QUIZ',        chip:'chip-quiz', chipText:'MEGA'},
+  {id:'s22',label:'Your Results',           group:'FINAL SCORE',      chip:'chip-quiz', chipText:'SCORE'},
+];
+
+const QUIZ={
+  t1:[
+    {q:"When creating a Gantt chart for Task 1, which of the following is specifically required by the specification?",
+     opts:["Show only the critical path with no team member names","List tasks alphabetically with equal time allocations","Assess the strengths and skills of people and assign appropriate tasks to them","Focus exclusively on software tasks and exclude planning activities"],
+     c:2, exp:"The spec requires assessing strengths and skills of people and assigning appropriate tasks, making scheduling decisions in response to a defined deadline, prioritising activities, and using an SDLC to organise tasks efficiently."},
+    {q:"The resource and cost plan in Task 1 must identify and calculate costs across which three categories?",
+     opts:["Software, hardware, and testing","Design, development, and deployment","Materials, physical resources, and personnel","Planning, coding, and evaluation"],
+     c:2, exp:"The specification explicitly states costs must cover: materials, physical resources, and personnel. The plan must also allow determination of affordability and viability of implementing the project over time."},
+    {q:"When writing the Rationale in Task 1, which of the following areas does NOT need to be justified?",
+     opts:["Order and timing of tasks","Allocation of team members","The programming language chosen for Task 4a","Impact of decisions on timings and costs"],
+     c:2, exp:"The Rationale covers: order/timing of tasks, allocation of team members, potential benefits and risks, and impact of decisions on timings and costs. The programming language choice for the development task is not a Task 1 requirement."},
+    {q:"A project milestone in a Gantt chart is best described as:",
+     opts:["A task lasting at least five days","A fixed cost item in the resource plan","A key checkpoint in the project with zero duration","The maximum number of team members assigned to any one task"],
+     c:2, exp:"A milestone is a significant checkpoint or event in the project (e.g. 'design approved', 'testing complete'). It has zero duration — it marks a point in time, not a period of work."},
+    {q:"Which project methodology delivers working software in incremental sprints and allows requirements to change throughout the project?",
+     opts:["Waterfall","Agile","RAD only","Lean only"],
+     c:1, exp:"Agile delivers working software in increments (sprints/epics). Requirements can be continually altered throughout. Users/clients see working products at each iteration. This contrasts with Waterfall, which is rigidly structured with limited client interaction."},
+  ],
+  t2:[
+    {q:"A student tests a password field that accepts 8–20 characters. What type of test data is the input '7 characters'?",
+     opts:["Valid","Valid extreme","Invalid extreme","Erroneous"],
+     c:2, exp:"7 characters is just one below the minimum boundary (8), making it invalid extreme data — just outside the valid range. It should be rejected. '8 characters' would be valid extreme (on the boundary)."},
+    {q:"Which of the following is NOT listed as a required element when documenting the testing process in Task 2?",
+     opts:["The purpose of each identified test","The name of the original developer who wrote the code","The expected results of each test","Any further actions required after comparing results"],
+     c:1, exp:"Required elements include: identifying tests, describing purpose, identifying test data, expected results, actual results, comparison, further actions, and refinements. The original developer's name is not a specification requirement."},
+    {q:"A program runs without crashing but outputs the wrong calculation result. What type of defect is this?",
+     opts:["Syntax error","Runtime error","Logic error","Requirement error"],
+     c:2, exp:"A logic error means the code runs successfully but produces incorrect output due to flawed logic (e.g. using > instead of >=, wrong formula, loop iterates wrong number of times). The program doesn't crash — it just gives the wrong answer."},
+    {q:"When fixing defects in Task 2, the specification requires that students:",
+     opts:["Rewrite the entire program in a different language","Follow programming conventions and justify decisions made when fixing each defect","Remove all comments to simplify the code","Add as many new features as possible to improve the overall product"],
+     c:1, exp:"The spec requires: following appropriate programming conventions, using precise logic and programming structures so the program produces consistently correct outcomes, and justifying any decisions made when fixing defects."},
+    {q:"Erroneous test data is defined as:",
+     opts:["Data at the exact boundary of the valid range","Data that is slightly outside the valid range but the correct type","Data of the completely wrong type, such as text where a number is expected","Data that is within the valid range but unusual"],
+     c:2, exp:"Erroneous data is of a completely wrong type — e.g. entering 'hello' in a number field, or special characters where letters are expected. It tests whether the program handles type mismatches gracefully instead of crashing."},
+  ],
+  t3:[
+    {q:"When decomposing the problem in Task 3, the specification requires students to:",
+     opts:["Focus only on creating a single comprehensive system with no sub-systems","Break the problem into smaller parts suitable for computational solutions, justifying decisions made","Design only the user interface and leave the back-end unspecified","Show the project plan only, without any algorithm design"],
+     c:1, exp:"Decomposition requires: breaking the problem into smaller computational parts with justification, making effective use of detailed abstraction and refinement, using elements of reusable components, and showing all necessary sub-systems."},
+    {q:"Which three control structures must algorithms in Task 3 make use of?",
+     opts:["Input, output, and storage","Classes, objects, and inheritance","Sequence, selection, and iteration","Encryption, authentication, and authorisation"],
+     c:2, exp:"The spec explicitly requires algorithms to make use of key constructs: sequence (step-by-step order), selection (IF/ELSE branching), and iteration (FOR/WHILE loops). These are the fundamental building blocks of all algorithms."},
+    {q:"The specification states that design documents in Task 3 must be detailed enough to:",
+     opts:["List all possible features the client might want in the future","Allow a third party to use the documents to create the proposed solution","Include only a flowchart and one page of pseudocode","Match the exact layout of a UML class diagram"],
+     c:2, exp:"Design documents must be sufficient to: effectively communicate the intended solution, allow the client to make informed decisions, AND allow a third party to use the documents to build the proposed solution. All three criteria matter."},
+    {q:"In a flowchart using BCS conventions, which symbol represents an input or output operation?",
+     opts:["Rectangle (process)","Diamond (decision)","Oval (terminal/start/end)","Parallelogram (input/output)"],
+     c:3, exp:"BCS standard: Parallelogram = input/output, Rectangle = process, Diamond = decision, Oval = start/end terminal. Using the wrong symbols loses marks in Task 3."},
+    {q:"When communicating a design to both a technical and non-technical audience, the specification requires:",
+     opts:["Using only technical vocabulary throughout, as the examiner is technical","Producing only written descriptions with no diagrams","An appropriate combination of written and diagrammatical presentation with consideration of audience","Translating all design decisions into working code immediately"],
+     c:2, exp:"The spec requires: appropriate combination of written and diagrammatic presentation, appropriate use of technical vocabulary, consideration of audience (both client and developer), and explanations of structures and processes."},
+  ],
+  t4:[
+    {q:"In Task 4a, which of the following is an example of good code organisation as specified?",
+     opts:["Using many global variables to share data between all functions","Copying and pasting the same code block in multiple places","Clear meaningful indentation, informative comments, and good use of local variables","Writing all code in a single function to minimise file complexity"],
+     c:2, exp:"Good code organisation requires: clear indentation, comments to explain logic, good use of local variables with minimal globals, use of constants, consistent style, defensive programming, and good exception handling. The spec explicitly discourages deeply nested code and copy-pasted blocks."},
+    {q:"The specification states that in Task 4a, formal documentation of testing is:",
+     opts:["Required and must match the same format as Task 2","Not required — testing is implicit through a working product that meets requirements","Required only for functions that handle user input","Optional and only needed if the program has errors"],
+     c:1, exp:"The spec explicitly states: 'Formal documentation of testing is not required in this activity.' Testing should still occur, but evidence is implicit — through a working product that meets the requirements detailed in the task brief."},
+    {q:"Task 4b asks students to 'discuss how it could be improved if the problem was revisited'. What is the best type of response?",
+     opts:["'I would add more features to make it better'","'Everything worked well so there is nothing to improve'","'I would improve the input validation on the password field by implementing a regex check because...'","'The interface looks good so no improvements needed'"],
+     c:2, exp:"High-mark evaluations are specific: they name the exact component, state what the improvement would be, and explain why. Vague statements like 'add more features' or 'it went well' do not meet the specification's requirement to give 'detailed consideration'."},
+    {q:"Which Python library does the specification explicitly mention for data visualisation in Task 4a?",
+     opts:["NumPy","Pandas","Matplotlib","Seaborn"],
+     c:2, exp:"The specification explicitly lists Matplotlib as a required library for data visualisation — for example, producing graphs of results, showing trends and patterns. Pandas is also listed but for data handling, not graphing."},
+    {q:"Task 4b requires evidence that the product meets user needs. This evidence should come from:",
+     opts:["The student's own opinion that the product looks good","Testing outcomes compared against the brief's success criteria","A peer's informal comment that they liked the interface","The amount of code written relative to the project size"],
+     c:1, exp:"The evaluation must 'provide evidence that the product meets user needs from testing' — meaning actual test results and measures against the success criteria in the brief. Personal opinion without evidence does not meet this requirement."},
+  ],
+  mega:[
+    {q:"[Pre-task] The ESP pre-task is NOT directly assessed. However, it is designed to:",
+     opts:["Replace the need to do Task 1 research independently","Allow students to take a practice examination","Familiarise students with the industry context so they can better respond to the assessed tasks","Count towards 5% of the core component marks"],
+     c:2, exp:"The pre-task allows familiarisation with the context (e.g. the financial sector). It is NOT directly assessed and NOT taken under controlled conditions. However, pre-task research can inform responses to the assessed tasks."},
+    {q:"[AOs] Which Assessment Objective carries the highest proportion of marks in the ESP?",
+     opts:["AO1: Planning (12%)","AO3: Selecting techniques (9%)","AO5: Project outcome and review (35%)","AO2: Application (41%)"],
+     c:3, exp:"AO2 (Application — developing software, fixing defects, mitigating security risks) carries 41% of the marks. AO5 (project outcome 26% + review 9%) is second at 35%. Together AO2 + AO5 = 76% of all marks."},
+    {q:"[Task 1] Which of the following correctly describes a dependency in a Gantt chart?",
+     opts:["The total cost of completing a task","A task that must be completed before another task can begin","The percentage of a team member's time allocated to a task","A milestone that marks the end of the project"],
+     c:1, exp:"A dependency is a relationship between tasks that means one task must finish before another can start. Correctly showing dependencies is essential in a Gantt chart to demonstrate logical scheduling decisions."},
+    {q:"[Task 2] A student tests a function that calculates VAT (20%) on a price. They input the text 'twenty'. What category of test data is this?",
+     opts:["Valid extreme","Invalid","Invalid extreme","Erroneous"],
+     c:3, exp:"'twenty' is a string (text) where a number is expected — it is erroneous (wrong data type entirely). Invalid data would be a number outside the accepted range. Erroneous data tests whether the system handles completely wrong data types."},
+    {q:"[Task 3] Abstraction in computational thinking and design means:",
+     opts:["Making algorithms as complex as possible to show technical skill","Writing code in an abstract language like Haskell","Removing unnecessary detail to focus on what is essential for solving the problem","Converting all functions into abstract classes"],
+     c:2, exp:"Abstraction filters out irrelevant detail and focuses on what is essential. For example, a road map abstracts away trees and terrain — only roads and junctions matter for navigation. It makes complex problems manageable by hiding complexity."},
+    {q:"[Task 4a] The specification explicitly states which data visualisation library should be used for producing graphs in Task 4a?",
+     opts:["NumPy","Tkinter","Matplotlib","Seaborn"],
+     c:2, exp:"The spec explicitly lists Matplotlib under the resources required for core component delivery. It is used for producing graphs of results, showing trends and patterns, and is part of the user experience requirements (visualisation of data)."},
+    {q:"[Task 1] Waterfall differs from Agile because Waterfall:",
+     opts:["Delivers working software at the end of each short sprint","Has no formal documentation requirements","Is rigidly structured with systematic steps and limited client interaction during development","Allows requirements to be changed at any stage of the project"],
+     c:2, exp:"Waterfall is rigidly structured with systematic phases. Progress is measured through artefacts. It has high importance placed on documentation and limited user/client interaction. Products cancelled early may result in no useable code. This contrasts with Agile's iterative, flexible approach."},
+    {q:"[Task 4b] Which statement BEST demonstrates high-quality reflective evaluation?",
+     opts:["'I think the program is good and mostly works correctly.'","'The login validation function fails to reject passwords under 8 characters — I would fix this by implementing a while loop that checks len(password) >= 8 before proceeding.'","'There are some bugs but overall I am happy with the result.'","'I would improve the program by making it better and adding more features.'"],
+     c:1, exp:"High-quality evaluation is specific, evidenced, and technical. It names the exact component (login validation function), states the defect (fails to reject short passwords), and gives a specific, technical improvement (while loop checking len >= 8). Vague statements score minimal marks."},
+  ],
+};
+
+let cur=0;
+const state={t1:{s:0,a:[]},t2:{s:0,a:[]},t3:{s:0,a:[]},t4:{s:0,a:[]},mega:{s:0,a:[]}};
+Object.keys(QUIZ).forEach(k=>{state[k].a=new Array(QUIZ[k].length).fill(false);});
+
+function buildTOC(){
+  const toc=document.getElementById('toc-scroll');
+  let curGroup='';
+  SLIDES.forEach((s,i)=>{
+    if(s.group!==curGroup){
+      curGroup=s.group;
+      const grp=document.createElement('div');grp.className='toc-group';
+      const lbl=document.createElement('div');lbl.className='toc-group-label';lbl.textContent=s.group;
+      grp.appendChild(lbl);toc.appendChild(grp);
+    }
+    const last=toc.lastElementChild;
+    const btn=document.createElement('button');
+    btn.className='toc-btn'+(i===0?' active':'');
+    btn.id='toc-'+i;
+    btn.innerHTML='<span class="n">'+(i+1)+'</span><span class="dot"></span>'+s.label;
+    btn.onclick=()=>{goTo(i);closeSidebar();};
+    last.appendChild(btn);
+  });
+}
+
+function buildDots(){
+  const c=document.getElementById('dots');
+  const groups=[...new Set(SLIDES.map(s=>s.group))];
+  groups.forEach((g,gi)=>{
+    const idx=SLIDES.findIndex(s=>s.group===g);
+    const d=document.createElement('div');
+    d.className='sdot'+(gi===0?' act':'');
+    d.title=g;d.dataset.idx=idx;
+    d.onclick=()=>goTo(idx);
+    c.appendChild(d);
+  });
+}
+
+function renderQuiz(containerId, key){
+  const el=document.getElementById(containerId);
+  if(!el||el.dataset.r)return;
+  el.dataset.r='1';
+  const qs=QUIZ[key];
+  qs.forEach((q,qi)=>{
+    const box=document.createElement('div');box.className='qbox';
+    box.innerHTML='<div class="q-meta">QUESTION '+(qi+1)+' OF '+qs.length+'</div>'
+      +'<div class="q-text">'+q.q+'</div>'
+      +'<div class="opts" id="opts-'+key+'-'+qi+'"></div>'
+      +'<div class="fb" id="fb-'+key+'-'+qi+'"></div>';
+    el.appendChild(box);
+    const opts=box.querySelector('#opts-'+key+'-'+qi);
+    ['A','B','C','D'].forEach((L,oi)=>{
+      const btn=document.createElement('button');btn.className='opt';
+      btn.innerHTML='<span class="opt-let">'+L+'</span>'+q.opts[oi];
+      btn.onclick=()=>answer(key,qs,qi,oi);
+      opts.appendChild(btn);
+    });
+  });
+}
+
+function answer(key,qs,qi,oi){
+  const st=state[key];
+  if(st.a[qi])return;
+  st.a[qi]=true;
+  const correct=oi===qs[qi].c;
+  if(correct)st.s++;
+  document.querySelectorAll('#opts-'+key+'-'+qi+' .opt').forEach((b,i)=>{
+    b.classList.add('dis');
+    if(i===qs[qi].c)b.classList.add('cor');
+    else if(i===oi&&!correct)b.classList.add('wrg');
+  });
+  const fb=document.getElementById('fb-'+key+'-'+qi);
+  fb.className='fb '+(correct?'cor':'wrg')+' show';
+  fb.innerHTML='<strong>'+(correct?'✅ Correct!':'❌ Incorrect.')+'</strong> '+qs[qi].exp;
+  renderFinal();
+}
+
+function renderFinal(){
+  const el=document.getElementById('qfinal');
+  if(!el)return;
+  const secs=[
+    {k:'t1',l:'Task 1: Planning'},
+    {k:'t2',l:'Task 2: Testing'},
+    {k:'t3',l:'Task 3: Design'},
+    {k:'t4',l:'Tasks 4a & 4b'},
+    {k:'mega',l:'Mega Quiz'},
+  ];
+  let tot=0,got=0;
+  secs.forEach(s=>{tot+=QUIZ[s.k].length;got+=state[s.k].s;});
+  const pct=tot?Math.round(got/tot*100):0;
+  const col=pct>=80?'var(--c4)':pct>=60?'var(--c5)':'var(--danger)';
+  const msg=pct>=80?'🎉 Excellent work! You are well prepared for the ESP.':pct>=60?'👍 Good progress — review the tasks you missed.':'📚 Keep revising! Go back through the slides for areas you found difficult.';
+  const breakdown=secs.map(s=>{
+    const sc=state[s.k].s;const total=QUIZ[s.k].length;
+    const attempted=state[s.k].a.filter(Boolean).length;
+    const c=sc/total>=.7?'var(--c4)':sc/total>=.5?'var(--c5)':'var(--danger)';
+    return '<div class="sc-item"><div class="n" style="color:'+c+'">'+sc+'/'+total+'</div><div class="l">'+s.l+'</div><div class="s">'+(attempted<total?total-attempted+' unanswered':'Complete')+'</div></div>';
+  }).join('');
+  el.innerHTML='<div class="score-wrap">'
+    +'<div class="score-pct" style="color:'+col+'">'+pct+'%</div>'
+    +'<div class="score-sub">'+got+' / '+tot+' questions correct</div>'
+    +'<p class="score-msg">'+msg+'</p>'
+    +'<div class="score-grid">'+breakdown+'</div>'
+    +'<button class="nbtn" onclick="goTo(0)" style="margin:0 auto;display:flex;padding:10px 28px;">🔄 Start Over</button>'
+    +'<div class="ib" style="margin-top:24px;text-align:left"><strong>ESP info:</strong> 14h 30min · 100 marks · 40% of core assessments. Five tasks: Pre-task (unassessed), Task 1 (Planning), Task 2 (Testing & Debugging), Task 3 (Design), Task 4a (Development), Task 4b (Evaluation). No internet. No AI tools.</div>'
+    +'</div>';
+}
+
+function goTo(idx){
+  if(idx<0||idx>=SLIDES.length)return;
+  const prev=document.getElementById(SLIDES[cur].id);
+  prev.classList.add('out');prev.classList.remove('active');
+  setTimeout(()=>prev.classList.remove('out'),300);
+  cur=idx;
+  const next=document.getElementById(SLIDES[cur].id);
+  next.classList.add('active');
+  if(SLIDES[cur].id==='s8')  renderQuiz('qt1','t1');
+  if(SLIDES[cur].id==='s12') renderQuiz('qt2','t2');
+  if(SLIDES[cur].id==='s16') renderQuiz('qt3','t3');
+  if(SLIDES[cur].id==='s20') renderQuiz('qt4','t4');
+  if(SLIDES[cur].id==='s21') renderQuiz('qmega','mega');
+  if(SLIDES[cur].id==='s22') renderFinal();
+  updateUI();
+}
+function go(d){goTo(cur+d);}
+
+function updateUI(){
+  const s=SLIDES[cur];
+  document.getElementById('slide-num').textContent=(cur+1)+'/'+SLIDES.length;
+  document.getElementById('top-chip').className='chip '+s.chip;
+  document.getElementById('top-chip').textContent=s.chipText;
+  document.getElementById('topbar-title').textContent=s.label;
+  document.getElementById('prog-fill').style.width=(cur/(SLIDES.length-1)*100)+'%';
+  document.getElementById('btn-prev').disabled=cur===0;
+  document.getElementById('btn-next').disabled=cur===SLIDES.length-1;
+  document.querySelectorAll('.toc-btn').forEach((b,i)=>{
+    b.classList.toggle('active',i===cur);
+    if(i===cur)b.scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+  const groups=[...new Set(SLIDES.map(s=>s.group))];
+  document.querySelectorAll('.sdot').forEach((d,i)=>{
+    const gIdx=groups.indexOf(SLIDES[cur].group);
+    d.classList.toggle('act',i===gIdx);
+  });
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+  if(e.key==='Escape')closeSidebar();
+});
+
+(function(){
+  const stage=document.getElementById('stage');
+  let x0=null,y0=null,t0=null;
+  stage.addEventListener('touchstart',e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();},{passive:true});
+  stage.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-x0,dy=t.clientY-y0,dt=Date.now()-t0;
+    x0=null;
+    if(dt>500||Math.abs(dx)<50||Math.abs(dy)/Math.abs(dx)>0.6)return;
+    if(document.getElementById('sidebar').classList.contains('open'))return;
+    if(dx<0)go(1);else go(-1);
+  },{passive:true});
+})();
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  const isOpen=sb.classList.contains('open');
+  if(isOpen){closeSidebar();}else{sb.classList.add('open');ov.classList.add('open');}
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+buildTOC();buildDots();updateUI();renderFinal();
+</script>
+<script src="../load-lib.js"></script>
+<script src="../index.js"></script>
+</body>
+</html>
