@@ -1,0 +1,5 @@
+reviews:
+  auto_review:
+    enabled: true
+    base_branches: []  # empty = only the default branch (main/master)
+    drafts: false

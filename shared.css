@@ -17,31 +17,43 @@ src: url('./fonts/SymbolsNerdFont-Regular.woff2') format('woff2');
 
 :root {
 --pico-primary: #a78bfa;
---pico-card-background-color: #1e1535;
---pico-card-border-color: #2d1f4e;
---pico-primary-background: #8b6fd4;
---pico-primary-hover-background: #7c3aed;
+--pico-card-background-color: #2A3A4F;
+--pico-card-border-color: #2E4057;
+--pico-primary-background: #4A716D;
+--pico-primary-hover-background: #487062;
 }
 
-[data-theme="light"] {
+[data-theme="light"] { /* This is basically legacy code T_T */
 --pico-card-background-color: #ffffff;
---pico-card-border-color: #7c3aed;
+--pico-card-border-color: #74A98D;
 --pico-background-color: transparent;
---pico-muted-color: #4c1d95;
---pico-color: #1e1b4b;
+--pico-muted-color: #74A98D;
+--pico-primary-background: #74AA8D;
+--pico-primary-hover-background: #558B6E;
+--pico-primary-border: #74AA8D;
+--pico-primary-hover-border: #558B6E;
+--pico-primary-focus: rgba(116, 170, 141, 0.5);
 }
+
 
 [data-theme="light"] article.guide-card {
-background: #bfb0fa;
+background: #74A98D;
 border: none;
+--pico-card-border-color: #74A98D;
+--pico-primary-background: #558B6E;
+--pico-primary-hover-background: #4E7E64;
+--pico-primary-border: #558B6E;
+--pico-primary-hover-border: #4E7E64;
+--pico-primary-focus: rgba(93, 152, 120, 0.5); /* A semi-transparent green for the focus ring */
 }
 
+
 [data-theme="light"] body {
-background: linear-gradient(135deg, #c4b5fd 0%, #e0e7ff 100%);
+background: linear-gradient(135deg, #66A182 0%, #ffffff 100%);
 }
 
 body {
-background: linear-gradient(135deg, #1a0a2e 0%, #0a0a0a 100%);
+background: linear-gradient(135deg, #2A3A4F 0%, #0a0a0a 100%);
 min-height: 100vh;
 font-family: 'Inter', 'NF Symbols', sans-serif;
 }
@@ -116,7 +128,7 @@ display: inline-block;
 font-size: 0.7rem;
 padding: 2px 8px;
 border-radius: 999px;
-background: #7c3aed;
+background: #2F454C;
 color: #ffffff;
 margin-bottom: 4px;
 }
