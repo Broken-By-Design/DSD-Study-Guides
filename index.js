@@ -27,7 +27,8 @@ const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 function setTheme(mode) {
   Object.values(buttons).forEach(b => b.classList.remove('active'));
-  buttons[mode].classList.add('active')
+  buttons[mode].classList.add('active');
+  localStorage.setItem('theme', mode);
 
   if (mode === 'system') {
     html.setAttribute('data-theme', systemDark.matches ? 'dark' : 'light');
@@ -44,5 +45,6 @@ systemDark.addEventListener('change', () => {
   if(buttons.system.classList.contains('active')) setTheme('system');
 })
 
-// Initialize default theme
-setTheme('system');
+// Initialize theme from localStorage or default to system
+const savedTheme = localStorage.getItem('theme') || 'system';
+setTheme(savedTheme);
