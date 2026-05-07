@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Employer Set Project — T Level Digital Software Development</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="../icon/favicon.ico">
-<link rel="apple-touch-icon" href="../icon/apple-touch-icon.png">
 <style>
 :root{
   --bg:#080b14;--surface:#0f1221;--surface2:#151929;--surface3:#1c2136;
   --border:#1f2540;--border2:#2a3055;
   --c1:#38bdf8;--c2:#818cf8;--c3:#fb923c;--c4:#4ade80;--c5:#facc15;--c6:#f472b6;
-  --text:#e2e8f0;--dim:#64748b;--danger:#f87171;
+  --text:#e2e8f0;--dim:#94a3b8;--danger:#f87171;
   --sidebar-w:260px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -41,30 +39,30 @@ body{
 }
 #sidebar-close{
   width:32px;height:32px;border-radius:7px;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--text);font-size:15px;cursor:pointer;
+  background:var(--surface2);color:var(--text);font-size:22px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 #sidebar-header .logo{
-  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;
+  font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.15em;
   color:var(--c1);text-transform:uppercase;margin-bottom:4px;
 }
-#sidebar-header .title{font-size:13px;font-weight:700;line-height:1.3;}
+#sidebar-header .title{font-size:18px;font-weight:700;line-height:1.3;}
 #toc-scroll{flex:1;overflow-y:auto;padding:8px 0 20px;-webkit-overflow-scrolling:touch;}
 .toc-group{padding:0 10px;margin-bottom:4px;}
 .toc-group-label{
-  font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;
   letter-spacing:.12em;color:var(--dim);padding:10px 8px 4px;
 }
 .toc-btn{
   width:100%;display:flex;align-items:center;gap:8px;padding:10px 8px;
   border-radius:7px;border:none;background:transparent;color:var(--dim);
-  font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;text-align:left;margin-bottom:1px;
+  font-family:'Outfit',sans-serif;font-size:18px;cursor:pointer;text-align:left;margin-bottom:1px;
   transition:background .15s,color .15s;
 }
 .toc-btn:hover{background:var(--surface2);color:var(--text);}
 .toc-btn.active{background:rgba(56,189,248,.12);color:var(--c1);}
 .toc-btn .n{
-  font-family:'JetBrains Mono',monospace;font-size:9px;min-width:22px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;min-width:22px;
   text-align:right;color:var(--border2);flex-shrink:0;
 }
 .toc-btn.active .n{color:var(--c1);opacity:.6;}
@@ -78,7 +76,7 @@ body{
 }
 #topbar-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow:hidden;}
 .chip{
-  font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
   padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.05em;flex-shrink:0;
 }
 .chip-intro{background:rgba(255,255,255,.1);color:var(--text);}
@@ -90,16 +88,16 @@ body{
 .chip-ev{background:rgba(244,114,182,.2);color:var(--c6);}
 .chip-quiz{background:rgba(248,113,113,.2);color:var(--danger);}
 #topbar-title{
-  font-size:12px;font-weight:600;color:var(--dim);
+  font-size:17px;font-weight:600;color:var(--dim);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;
 }
 #topbar-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 #prog-track{width:72px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
 #prog-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--c4));border-radius:2px;transition:width .4s;}
-#slide-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);white-space:nowrap;}
+#slide-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);white-space:nowrap;}
 #menu-btn{
   width:34px;height:34px;border-radius:7px;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--text);font-size:17px;cursor:pointer;
+  background:var(--surface2);color:var(--text);font-size:24px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
   -webkit-tap-highlight-color:transparent;
 }
@@ -120,9 +118,9 @@ body{
 @media(min-width:769px){.slide{padding:28px 48px 40px;}}
 .slide.active{opacity:1;pointer-events:all;transform:translateX(0);}
 .slide.out{opacity:0;transform:translateX(-24px);}
-.slide h1{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:4px;}
+.slide h1{font-size:clamp(26px,4.5vw,38px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:4px;}
 .slide h3{
-  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;color:var(--c1);
   margin-bottom:8px;margin-top:14px;
 }
@@ -141,10 +139,10 @@ body{
   border-radius:10px;padding:14px 16px;transition:border-color .2s;
 }
 .card:hover{border-color:var(--border2);}
-.card p,.card li{font-size:13px;line-height:1.65;color:var(--dim);}
+.card p,.card li{font-size:18px;line-height:1.85;color:var(--dim);}
 .card ul{padding-left:16px;}
 .card ul li{margin-bottom:4px;}
-.card h3{margin-top:0;}
+.card h3{margin-top:0;font-size:13px;color:var(--text);letter-spacing:.06em;}
 .al{border-left:3px solid var(--c1);}
 .ap{border-left:3px solid var(--c2);}
 .ao{border-left:3px solid var(--c3);}
@@ -153,27 +151,27 @@ body{
 .apk{border-left:3px solid var(--c6);}
 .ad{border-left:3px solid var(--danger);}
 table{
-  width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;
+  width:100%;border-collapse:collapse;font-size:18px;margin:8px 0;
   display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;
 }
-@media(min-width:769px){table{font-size:13px;}}
+@media(min-width:769px){table{font-size:18px;}}
 th{
   background:var(--surface3);padding:8px 12px;text-align:left;
-  font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--dim);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);
   border-bottom:1px solid var(--border2);letter-spacing:.05em;
   text-transform:uppercase;white-space:nowrap;
 }
-td{padding:7px 12px;border-bottom:1px solid var(--border);color:var(--dim);line-height:1.55;}
+td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text);line-height:1.7;}
 tr:last-child td{border-bottom:none;}
 td strong{color:var(--text);}
 code{
-  font-family:'JetBrains Mono',monospace;font-size:11px;
+  font-family:'JetBrains Mono',monospace;font-size:15px;
   background:rgba(0,0,0,.4);border:1px solid var(--border2);
   padding:1px 5px;border-radius:3px;color:var(--c1);
 }
 .ib{
-  border-radius:8px;padding:12px 15px;margin:10px 0;font-size:13px;
-  line-height:1.65;color:var(--dim);
+  border-radius:8px;padding:12px 15px;margin:10px 0;font-size:18px;
+  line-height:1.85;color:var(--dim);
   background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.2);
 }
 .ib strong{color:var(--text);}
@@ -187,12 +185,12 @@ code{
   display:flex;gap:12px;padding:12px 15px;border-radius:8px;
   background:var(--surface2);border:1px solid var(--border);margin:10px 0;
 }
-.co-icon{font-size:18px;flex-shrink:0;}
-.co-text{font-size:13px;color:var(--dim);line-height:1.65;}
+.co-icon{font-size:26px;flex-shrink:0;}
+.co-text{font-size:18px;color:var(--dim);line-height:1.85;}
 .co-text strong{color:var(--text);}
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
 .tag{
-  font-size:11.5px;font-weight:500;padding:4px 10px;border-radius:20px;
+  font-size:17px;font-weight:500;padding:4px 10px;border-radius:20px;
   background:var(--surface3);border:1px solid var(--border2);color:var(--dim);
 }
 .tag.hi{background:rgba(74,222,128,.1);color:var(--c4);border-color:rgba(74,222,128,.3);}
@@ -207,16 +205,16 @@ code{
 }
 @media(min-width:769px){.hero{min-height:calc(100vh - 160px);gap:20px;}}
 .hero-eyebrow{
-  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
+  font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--c1);
 }
 .hero h1{
-  font-size:clamp(32px,6vw,58px);
+  font-size:clamp(36px,6.5vw,62px);
   background:linear-gradient(130deg,var(--text) 30%,var(--c1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:0;line-height:1.1;
 }
-.hero-sub{font-size:clamp(14px,2vw,17px);color:var(--dim);max-width:520px;line-height:1.6;}
+.hero-sub{font-size:clamp(17px,2.5vw,20px);color:var(--dim);max-width:520px;line-height:1.75;}
 .hero-stats{
   display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px;
 }
@@ -224,12 +222,12 @@ code{
   background:var(--surface2);border:1px solid var(--border);border-radius:10px;
   padding:12px 18px;text-align:center;min-width:90px;
 }
-.hstat-n{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--c1);}
-.hstat-l{font-size:11px;color:var(--dim);margin-top:2px;}
+.hstat-n{font-size:clamp(23px,3.5vw,32px);font-weight:800;color:var(--c1);}
+.hstat-l{font-size:15px;color:var(--dim);margin-top:2px;}
 .nbtn{
   display:inline-flex;align-items:center;gap:8px;padding:10px 20px;
   border-radius:9px;border:1px solid var(--border2);background:var(--surface2);
-  color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
+  color:var(--text);font-family:'Outfit',sans-serif;font-size:20px;font-weight:600;
   cursor:pointer;transition:border-color .2s,background .2s;
   -webkit-tap-highlight-color:transparent;
 }
@@ -252,21 +250,21 @@ code{
   padding:18px 18px 14px;margin-bottom:16px;
 }
 .q-meta{
-  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--dim);margin-bottom:10px;
 }
-.q-text{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:14px;}
+.q-text{font-size:22px;font-weight:600;line-height:1.5;margin-bottom:14px;}
 .opts{display:flex;flex-direction:column;gap:7px;}
 .opt{
   display:flex;align-items:center;gap:10px;padding:10px 13px;
   border-radius:8px;border:1px solid var(--border);background:var(--surface3);
-  color:var(--dim);font-family:'Outfit',sans-serif;font-size:13px;
+  color:var(--dim);font-family:'Outfit',sans-serif;font-size:18px;
   cursor:pointer;text-align:left;transition:border-color .15s,background .15s,color .15s;
   -webkit-tap-highlight-color:transparent;
 }
 .opt:hover:not(.dis){border-color:var(--c1);background:rgba(56,189,248,.07);color:var(--text);}
 .opt-let{
-  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
   min-width:18px;height:18px;border-radius:4px;background:var(--border2);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
@@ -276,7 +274,7 @@ code{
 .opt.wrg .opt-let{background:var(--danger);color:#000;}
 .opt.dis{cursor:not-allowed;opacity:.8;}
 .fb{
-  font-size:12.5px;line-height:1.65;padding:10px 12px;border-radius:7px;
+  font-size:18px;line-height:1.85;padding:10px 12px;border-radius:7px;
   margin-top:10px;display:none;
 }
 .fb.show{display:block;}
@@ -287,9 +285,9 @@ code{
   background:var(--surface2);border:1px solid var(--border);border-radius:14px;
   padding:28px 22px;text-align:center;max-width:560px;margin:0 auto;
 }
-.score-pct{font-size:clamp(52px,10vw,80px);font-weight:800;line-height:1;}
-.score-sub{font-size:14px;color:var(--dim);margin-top:6px;}
-.score-msg{font-size:14px;color:var(--dim);margin:14px 0;line-height:1.6;}
+.score-pct{font-size:clamp(58px,11vw,88px);font-weight:800;line-height:1;}
+.score-sub{font-size:20px;color:var(--dim);margin-top:6px;}
+.score-msg{font-size:20px;color:var(--dim);margin:14px 0;line-height:1.75;}
 .score-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
   margin:18px 0;text-align:left;
@@ -299,16 +297,70 @@ code{
   background:var(--surface3);border:1px solid var(--border);border-radius:8px;
   padding:10px 12px;
 }
-.sc-item .n{font-size:20px;font-weight:800;line-height:1;}
-.sc-item .l{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.4;}
-.sc-item .s{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--border2);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
+.sc-item .n{font-size:24px;font-weight:800;line-height:1;}
+.sc-item .l{font-size:15px;color:var(--dim);margin-top:3px;line-height:1.4;}
+.sc-item .s{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--border2);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
 .ao-bar{
   display:flex;align-items:center;gap:10px;margin-bottom:9px;
 }
-.ao-label{font-size:13px;font-weight:600;min-width:28px;flex-shrink:0;}
+.ao-label{font-size:18px;font-weight:600;min-width:28px;flex-shrink:0;}
 .ao-track{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
 .ao-fill{height:100%;border-radius:4px;}
-.ao-pct{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);min-width:30px;text-align:right;flex-shrink:0;}
+.ao-pct{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);min-width:30px;text-align:right;flex-shrink:0;}
+
+#home-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:7px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--text);font-size:17px;text-decoration:none;
+  flex-shrink:0;-webkit-tap-highlight-color:transparent;
+  transition:border-color .15s,color .15s;
+}
+#home-btn:hover{border-color:var(--c1);color:var(--c1);}
+@media(min-width:769px){#home-btn{display:flex !important;}}
+
+/* ── LIGHT / DARK MODE ── */
+:root.light{
+  --bg:#f0f4f8;--surface:#ffffff;--surface2:#e8edf3;--surface3:#dce3ec;
+  --border:#c8d3df;--border2:#b0bfcf;
+  --text:#0f172a;--dim:#374151;--danger:#dc2626;
+}
+:root.light body{background:var(--bg);color:var(--text);}
+:root.light .card{background:var(--surface2);border-color:var(--border);}
+:root.light .qbox{background:var(--surface2);border-color:var(--border);}
+:root.light .opt{background:var(--surface3);border-color:var(--border);color:var(--dim);}
+:root.light .ib{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.3);}
+:root.light .ib.y{background:rgba(202,138,4,.08);border-color:rgba(202,138,4,.3);}
+:root.light .ib.g{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.3);}
+:root.light .ib.p{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.3);}
+:root.light .ib.o{background:rgba(234,88,12,.08);border-color:rgba(234,88,12,.3);}
+:root.light .ib.d{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.3);}
+:root.light .ib.pk{background:rgba(219,39,119,.08);border-color:rgba(219,39,119,.3);}
+:root.light #sidebar,
+:root.light #topbar,
+:root.light #nav,
+:root.light #bottom-bar{background:var(--surface);border-color:var(--border);}
+:root.light .co{background:var(--surface2);border-color:var(--border);}
+:root.light th{background:var(--surface3);color:var(--dim);}
+:root.light td{border-color:var(--border);}
+:root.light .tag{background:var(--surface3);border-color:var(--border2);}
+:root.light #stage{background:var(--bg);}
+:root.light #stage::before{background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);}
+:root.light .toc-btn:hover{background:var(--surface2);}
+:root.light .score-wrap{background:var(--surface2);border-color:var(--border);}
+:root.light .sc-item{background:var(--surface3);border-color:var(--border);}
+:root.light .hstat{background:var(--surface2);border-color:var(--border);}
+:root.light code{background:rgba(0,0,0,.06);border-color:var(--border2);}
+:root.light .nbtn{background:var(--surface2);border-color:var(--border2);color:var(--text);}
+:root.light .hero h1{background:linear-gradient(130deg,var(--text) 30%,var(--c1));-webkit-background-clip:text;background-clip:text;}
+
+/* ── THEME TOGGLE BUTTON ── */
+#theme-btn{
+  width:34px;height:34px;border-radius:7px;border:1px solid var(--border2);
+  background:var(--surface2);color:var(--text);font-size:17px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:border-color .15s,color .15s;
+}
+#theme-btn:hover{border-color:var(--c1);color:var(--c1);}
 </style>
 </head>
 <body>
@@ -328,6 +380,8 @@ code{
   <div id="topbar">
     <div id="topbar-left">
       <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+      <a href="../index.html" id="home-btn" title="Return to Homepage" aria-label="Return to Homepage">&#127968;</a>
+      <button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle theme">🌙</button>
       <span class="chip chip-intro" id="top-chip">INTRO</span>
       <span id="topbar-title">Employer Set Project</span>
     </div>
@@ -388,16 +442,61 @@ code{
       <div class="ib"><strong>Five AOs determine your mark.</strong> AO2 (Application) is the biggest — focus your revision on actually doing things, not just knowing them.</div>
       <h3>Mark Breakdown</h3>
       <div class="ao-bar"><span class="ao-label" style="color:var(--c2)">AO1</span><div class="ao-track"><div class="ao-fill" style="width:12%;background:var(--c2)"></div></div><span class="ao-pct">12%</span></div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Planning</strong> — Plan an approach to solving problems in response to a brief.</div>
+      <div style="font-size:17px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Planning</strong> — Plan an approach to solving problems in response to a brief.</div>
       <div class="ao-bar"><span class="ao-label" style="color:var(--c3)">AO2</span><div class="ao-track"><div class="ao-fill" style="width:41%;background:var(--c3)"></div></div><span class="ao-pct">41%</span></div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Application</strong> — Develop software, create an artefact, fix defects and mitigate security risks.</div>
+      <div style="font-size:17px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Application</strong> — Develop software, create an artefact, fix defects and mitigate security risks.</div>
       <div class="ao-bar"><span class="ao-label" style="color:var(--c1)">AO3</span><div class="ao-track"><div class="ao-fill" style="width:9%;background:var(--c1)"></div></div><span class="ao-pct">9%</span></div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Selecting Techniques & Resources</strong> — Select relevant tools and work collaboratively.</div>
+      <div style="font-size:17px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Selecting Techniques & Resources</strong> — Select relevant tools and work collaboratively.</div>
       <div class="ao-bar"><span class="ao-label" style="color:var(--c4)">AO4</span><div class="ao-track"><div class="ao-fill" style="width:3%;background:var(--c4);min-width:6px"></div></div><span class="ao-pct">3%</span></div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">English, Maths & Digital Skills</strong> — Communicate technical info to technical and non-technical audiences.</div>
+      <div style="font-size:17px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">English, Maths & Digital Skills</strong> — Communicate technical info to technical and non-technical audiences.</div>
       <div class="ao-bar"><span class="ao-label" style="color:var(--c5)">AO5</span><div class="ao-track"><div class="ao-fill" style="width:35%;background:var(--c5)"></div></div><span class="ao-pct">35%</span></div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Project Outcome + Review</strong> — Produce software/artefacts (26%) and reflective evaluation (9%).</div>
+      <div style="font-size:17px;color:var(--dim);margin-bottom:10px;margin-left:38px"><strong style="color:var(--text)">Project Outcome + Review</strong> — Produce software/artefacts (26%) and reflective evaluation (9%).</div>
       <div class="ib g"><strong>💡 Revision strategy:</strong> AO2 (41%) + AO5 (35%) = 76% of marks. These reward <em>doing</em>: fixing real code, writing working software, and evaluating honestly. Spend most of your time practising these skills.</div>
+    </div>
+
+
+    <!-- ===== SLIDE: EXAM STRATEGY ===== -->
+    <div class="slide" id="sexam">
+      <div class="sh"><h1>Exam Strategy</h1><span class="chip chip-intro">STRATEGY</span></div>
+      <div class="ib g"><strong>🎯 Walk in prepared.</strong> The ESP is about applying what you know under pressure. These strategies help you maximise marks in every task.</div>
+      <h3>How to Break Down Any Question</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>Step 1 — Read the brief TWICE</h3>
+          <p>First read: get the big picture. Second read: underline every requirement, constraint, and keyword. The brief contains everything you need — the answers are in there.</p>
+        </div>
+        <div class="card ap">
+          <h3>Step 2 — Spot the command words</h3>
+          <p>These tell you exactly what depth of answer is expected. "Describe" ≠ "Justify". Using the wrong depth wastes time and loses marks.</p>
+        </div>
+        <div class="card ag">
+          <h3>Step 3 — Plan before you write</h3>
+          <p>Spend 2–3 minutes noting what your answer will cover. This stops you going off-topic and helps you hit every marking point systematically.</p>
+        </div>
+        <div class="card ao">
+          <h3>Step 4 — Justify everything</h3>
+          <p>Never just state what you did — explain WHY. <em>"I used a dictionary because key-value pairs allow fast lookup by key, which is needed when retrieving user records by ID."</em></p>
+        </div>
+      </div>
+      <h3>Command Words Decoded</h3>
+      <table>
+        <thead><tr><th>Word</th><th>What it means</th><th>Example response style</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Describe</strong></td><td>Say what something is or does — no opinion needed</td><td>"A Gantt chart shows tasks, durations, and dependencies across a timeline."</td></tr>
+          <tr><td><strong>Explain</strong></td><td>Say what AND why — add reasoning</td><td>"A Gantt chart is used because it visually shows which tasks overlap and who is responsible."</td></tr>
+          <tr><td><strong>Justify</strong></td><td>Give reasons AND weigh against alternatives</td><td>"I chose Agile over Waterfall because requirements may change. Waterfall's rigid phases would not suit this because…"</td></tr>
+          <tr><td><strong>Evaluate</strong></td><td>Judge success against criteria, give evidence, suggest improvements</td><td>"The solution meets criterion X as shown by test Y. However, Z could be improved by…"</td></tr>
+          <tr><td><strong>Identify</strong></td><td>Name it — brief, no explanation needed</td><td>"The error is a logic error on line 12."</td></tr>
+          <tr><td><strong>Analyse</strong></td><td>Break it down, examine components, draw conclusions</td><td>"Breaking down the requirements, the system needs three sub-systems: login, data processing, and reporting."</td></tr>
+        </tbody>
+      </table>
+      <h3>Time Budget Per Task</h3>
+      <div class="g3">
+        <div class="card al"><h3>⏰ Task 1 (~2h)</h3><p>Gantt: 45 min · Cost plan: 30 min · Rationale: 45 min. <strong>Don't over-engineer the Gantt</strong> — the most marks are in your written rationale.</p></div>
+        <div class="card ap"><h3>⏰ Task 2 (~2.5h)</h3><p>Read code + requirements: 15 min · Test + document: 60 min · Fix defects: 60 min · Re-test: 15 min. <strong>Always annotate your fixes</strong> — state WHY you changed each line.</p></div>
+        <div class="card ao"><h3>⏰ Tasks 3–4 (~10h)</h3><p>Design thoroughly in Task 3 — it makes Task 4a faster. <strong>Don't rush Task 4b</strong> — evaluation is 9% of total marks and students consistently underscore here.</p></div>
+      </div>
+      <div class="ib y"><strong>⚠️ Top 5 mark-losing mistakes:</strong> (1) Listing without justifying. (2) Vague evaluation — "it worked well." (3) Gantt with no dependencies shown. (4) Test table missing expected results. (5) Task 4b not referencing the brief's success criteria by name.</div>
     </div>
 
     <!-- ===== SLIDE 3: PRE-TASK ===== -->
@@ -451,7 +550,7 @@ code{
         </div>
       </div>
       <h3>SDLC Connection</h3>
-      <p style="font-size:13px;color:var(--dim);line-height:1.65">Task 1 maps to the <strong style="color:var(--text)">Planning & Requirements Analysis</strong> lifecycle stage. You must use an appropriate software development lifecycle (Agile, Waterfall, RAD, Lean, Scaled Agile) to organise your project tasks efficiently.</p>
+      <p style="font-size:18px;color:var(--dim);line-height:1.85">Task 1 maps to the <strong style="color:var(--text)">Planning & Requirements Analysis</strong> lifecycle stage. You must use an appropriate software development lifecycle (Agile, Waterfall, RAD, Lean, Scaled Agile) to organise your project tasks efficiently.</p>
       <div class="tags">
         <span class="tag hi2">Agile / Scrum</span>
         <span class="tag">Waterfall</span>
@@ -528,7 +627,63 @@ code{
           <p>What are the ongoing costs after go-live? Maintenance, support, licence renewals, server hosting. Does the solution provide value long-term?</p>
         </div>
       </div>
-      <div class="ib"><strong>Exam tip:</strong> To hit higher marks, don't just list costs — <em>justify</em> them. Explain why you chose a particular resource and what its cost impact is on the project timeline.</div>
+      <h3>Step-by-Step: How to Build the Cost Plan Table</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>📋 Required Table Columns</h3>
+          <table style="font-size:15px">
+            <thead><tr><th>Resource</th><th>Type</th><th>Qty / Days</th><th>Unit Cost</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>Developer</td><td>Personnel</td><td>8 days</td><td>£200/day</td><td><strong>£1,600</strong></td></tr>
+              <tr><td>Software Licence</td><td>Material</td><td>3 units</td><td>£49</td><td><strong>£147</strong></td></tr>
+              <tr><td>Test Laptop</td><td>Physical</td><td>2 units</td><td>£350</td><td><strong>£700</strong></td></tr>
+              <tr><td colspan="4"><strong>Grand Total</strong></td><td><strong>£2,447</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card ap">
+          <h3>🔢 Calculation Order</h3>
+          <ul>
+            <li><strong>1.</strong> For each person: <code>day rate × days assigned</code></li>
+            <li><strong>2.</strong> For each material: <code>quantity × unit price</code></li>
+            <li><strong>3.</strong> For each physical resource: <code>quantity × unit price</code></li>
+            <li><strong>4.</strong> Sum each category subtotal</li>
+            <li><strong>5.</strong> Add all subtotals → <strong>Total Project Cost</strong></li>
+            <li><strong>6.</strong> Client budget − Total = <strong>surplus or deficit</strong></li>
+          </ul>
+        </div>
+      </div>
+      <h3>What Counts as Each Type?</h3>
+      <div class="g3">
+        <div class="card ag">
+          <h3>Materials (examples)</h3>
+          <ul>
+            <li>Software licences (IDE, tools)</li>
+            <li>Cloud hosting / SaaS subscriptions</li>
+            <li>API access fees</li>
+            <li>Stock assets, fonts, libraries</li>
+          </ul>
+        </div>
+        <div class="card ay">
+          <h3>Physical Resources (examples)</h3>
+          <ul>
+            <li>Laptops / desktops</li>
+            <li>Test devices (mobile, tablet)</li>
+            <li>Servers or networking equipment</li>
+            <li>Office equipment</li>
+          </ul>
+        </div>
+        <div class="card ao">
+          <h3>Personnel (examples)</h3>
+          <ul>
+            <li>Project manager</li>
+            <li>Developers / programmers</li>
+            <li>Testers / QA engineers</li>
+            <li>UX / UI designers</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib"><strong>Exam tip:</strong> To hit higher marks, don't just list costs — <em>justify</em> them. Explain why you chose a particular resource and what its cost impact is on the project timeline. Also state clearly whether the project is within budget and by how much.</div>
     </div>
 
     <!-- ===== SLIDE 7: RATIONALE ===== -->
@@ -555,6 +710,60 @@ code{
         </div>
       </div>
       <div class="ib g"><strong>📝 High-mark tip:</strong> Use connective phrases like <em>"I assigned [person] to [task] because their experience in X means..."</em> and <em>"This scheduling decision reduces risk because..."</em> — examiners reward explicit, reasoned justification.</div>
+    </div>
+
+
+    <!-- ===== SLIDE: TASK 1 MATHS & CALCULATIONS ===== -->
+    <div class="slide" id="smaths">
+      <div class="sh"><h1>Task 1: Maths &amp; Calculations</h1><span class="chip chip-t1">TASK 1 · PLANNING</span></div>
+      <div class="ib p"><strong>📐 The resource and cost plan requires you to correctly calculate and justify all project costs.</strong> Here are the key formulae you need.</div>
+      <h3>Core Formulae</h3>
+      <table>
+        <thead><tr><th>What to Calculate</th><th>Formula</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Daily Rate</strong></td><td>Hourly rate × hours per day</td><td>£25/hr × 8 hrs = <strong>£200/day</strong></td></tr>
+          <tr><td><strong>Personnel Cost (one person)</strong></td><td>Day rate × number of days assigned</td><td>£200/day × 5 days = <strong>£1,000</strong></td></tr>
+          <tr><td><strong>Total Personnel Cost</strong></td><td>Sum of all individual personnel costs</td><td>£1,000 + £800 + £600 = <strong>£2,400</strong></td></tr>
+          <tr><td><strong>Materials Cost</strong></td><td>Quantity × unit price</td><td>3 licences × £49 = <strong>£147</strong></td></tr>
+          <tr><td><strong>Total Project Cost</strong></td><td>Materials + Physical Resources + Personnel</td><td>£147 + £500 + £2,400 = <strong>£3,047</strong></td></tr>
+          <tr><td><strong>Budget Surplus / Deficit</strong></td><td>Client budget − Total project cost</td><td>£4,000 − £3,047 = <strong>£953 surplus</strong></td></tr>
+          <tr><td><strong>Project Duration (weeks)</strong></td><td>Total days ÷ working days per week</td><td>15 days ÷ 5 = <strong>3 weeks</strong></td></tr>
+          <tr><td><strong>Task % of Project</strong></td><td>(Task days ÷ total project days) × 100</td><td>(3 ÷ 15) × 100 = <strong>20%</strong></td></tr>
+        </tbody>
+      </table>
+      <h3>Worked Example — Full Cost Plan</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>💰 Personnel Costs</h3>
+          <table style="font-size:15px">
+            <thead><tr><th>Role</th><th>Days</th><th>Day Rate</th><th>Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Project Manager</td><td>5</td><td>£250</td><td><strong>£1,250</strong></td></tr>
+              <tr><td>Developer</td><td>8</td><td>£200</td><td><strong>£1,600</strong></td></tr>
+              <tr><td>Tester</td><td>3</td><td>£180</td><td><strong>£540</strong></td></tr>
+              <tr><td colspan="3"><strong>Total Personnel</strong></td><td><strong>£3,390</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card ap">
+          <h3>🧱 Materials &amp; Resources</h3>
+          <table style="font-size:15px">
+            <thead><tr><th>Item</th><th>Qty</th><th>Unit Price</th><th>Cost</th></tr></thead>
+            <tbody>
+              <tr><td>VS Code Pro Licence</td><td>3</td><td>£49</td><td><strong>£147</strong></td></tr>
+              <tr><td>Cloud Hosting (3mo)</td><td>1</td><td>£120</td><td><strong>£120</strong></td></tr>
+              <tr><td>Test Devices</td><td>2</td><td>£300</td><td><strong>£600</strong></td></tr>
+              <tr><td colspan="3"><strong>Total Resources</strong></td><td><strong>£867</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="g3">
+        <div class="card ag"><h3>📊 Total Project Cost</h3><p>£3,390 + £867 = <strong style="color:var(--c4);font-size:20px">£4,257</strong></p></div>
+        <div class="card ay"><h3>💳 Client Budget</h3><p>Budget = <strong style="font-size:20px">£5,000</strong><br>Surplus = £5,000 − £4,257 = <strong style="color:var(--c4)">£743</strong></p></div>
+        <div class="card ao"><h3>✅ Affordability</h3><p>Project is <strong>within budget</strong> with £743 contingency. Recommend keeping this as a risk buffer.</p></div>
+      </div>
+      <div class="co"><span class="co-icon">💡</span><div class="co-text"><strong>Exam tip:</strong> Always show your working — write the formula, then substitute values, then give the answer. Examiners award marks for correct method even if the final number has a small error.</div></div>
     </div>
 
     <!-- ===== SLIDE 8: QUIZ TASK 1 ===== -->
@@ -632,6 +841,65 @@ code{
       </div>
     </div>
 
+
+    <!-- ===== SLIDE: TESTING TYPES ===== -->
+    <div class="slide" id="stypes">
+      <div class="sh"><h1>Testing Types</h1><span class="chip chip-t2">TASK 2 · TESTING</span></div>
+      <div class="ib o"><strong>Know the difference between testing types AND error types.</strong> The exam may ask you to identify which type of testing you used and what category of error you found.</div>
+      <h3>Types of Testing</h3>
+      <table>
+        <thead><tr><th>Testing Type</th><th>What it checks</th><th>When used</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Unit Testing</strong></td><td>A single function or module in isolation</td><td>During development — test each piece as you build it</td></tr>
+          <tr><td><strong>Integration Testing</strong></td><td>How modules work together</td><td>After unit testing — verify modules connect and communicate correctly</td></tr>
+          <tr><td><strong>System Testing</strong></td><td>The complete system end-to-end</td><td>After integration — test the whole solution as a real user would</td></tr>
+          <tr><td><strong>Acceptance Testing (UAT)</strong></td><td>Whether the system meets the client's stated requirements</td><td>Final stage — client or real users verify the product is fit for purpose</td></tr>
+          <tr><td><strong>Functional Testing</strong></td><td>That each feature DOES what it is supposed to do</td><td>Throughout — does the login actually log you in? Does the calculation give the right answer?</td></tr>
+          <tr><td><strong>Non-Functional Testing</strong></td><td>HOW the system performs — speed, security, usability</td><td>Load testing, security testing, accessibility checks alongside functional tests</td></tr>
+          <tr><td><strong>Regression Testing</strong></td><td>That fixing one bug hasn't broken something else</td><td>After every fix — always re-test the entire suite, not just the changed function</td></tr>
+          <tr><td><strong>Alpha / Beta Testing</strong></td><td>Alpha: internal team. Beta: limited real users</td><td>Pre-release — gather real-world feedback before full launch</td></tr>
+        </tbody>
+      </table>
+      <h3>Functional vs Logical Errors — Know the Difference</h3>
+      <div class="g2">
+        <div class="card ao">
+          <h3>🔧 Functional Error</h3>
+          <p>The feature <strong>doesn't work at all</strong> as specified. The requirement exists, but the code either doesn't implement it or implements something completely wrong.</p>
+          <p style="margin-top:8px"><strong>Example:</strong> The brief says "users must be able to log out." The logout button exists but clicking it does nothing — the session is never cleared.</p>
+          <p style="margin-top:8px"><strong>How to find it:</strong> Functional testing — run through each requirement and check it works as specified.</p>
+        </div>
+        <div class="card ad">
+          <h3>🧠 Logical Error</h3>
+          <p>The feature <strong>runs without crashing</strong> but produces the <strong>wrong result</strong>. The code is syntactically valid but the logic is flawed.</p>
+          <p style="margin-top:8px"><strong>Example:</strong> A discount function that should give 10% off calculates <code>price * 0.9</code> then subtracts from price again — giving 90% off instead.</p>
+          <p style="margin-top:8px"><strong>How to find it:</strong> Use valid and boundary test data — trace the expected output vs actual output step by step.</p>
+        </div>
+      </div>
+      <h3>All Four Error Types at a Glance</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>Error Type Summary</h3>
+          <ul>
+            <li><strong>Syntax error</strong> — Breaks language rules. Won't even run. <em>(Missing colon, wrong indentation, mismatched bracket)</em></li>
+            <li><strong>Logic error</strong> — Runs but gives wrong output. <em>(&gt; instead of &gt;=, wrong formula, loop off-by-one)</em></li>
+            <li><strong>Runtime error</strong> — Crashes during execution. <em>(Division by zero, index out of range, calling undefined function)</em></li>
+            <li><strong>Requirement error</strong> — Runs, no crash, output seems correct, but doesn't meet the spec. <em>(Wrong output format, missing feature, incorrect validation rule)</em></li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>How to Spot Them in Task 2</h3>
+          <ul>
+            <li><strong>Read the requirements FIRST</strong> — know what the code SHOULD do before looking at what it does</li>
+            <li><strong>Trace through line by line</strong> with sample input — track variable values manually on paper</li>
+            <li><strong>Check boundary conditions</strong> — where does the logic change? That's where errors hide</li>
+            <li><strong>Test with all 5 data types</strong> — valid, valid extreme, invalid, invalid extreme, erroneous</li>
+            <li><strong>Read error messages carefully</strong> — they tell you the line number and type</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib g"><strong>Exam tip:</strong> In Task 2, identify the error type BEFORE fixing. Write in your test table: <em>"This is a logic error because the program runs but produces [wrong value] instead of [expected value] when [input]."</em> Examiners award marks for correct classification.</div>
+    </div>
+
     <!-- ===== SLIDE 11: FIXING CODE ===== -->
     <div class="slide" id="s11">
       <div class="sh"><h1>Fixing the Code</h1><span class="chip chip-t2">TASK 2 · TESTING</span></div>
@@ -697,6 +965,52 @@ code{
       <div class="ib y"><strong>💡 Key:</strong> Use a combination of written and diagrammatical presentation. Pure text or pure diagrams alone will limit your marks.</div>
     </div>
 
+
+    <!-- ===== SLIDE: HOW TO APPROACH TASK 3 ===== -->
+    <div class="slide" id="sapproach">
+      <div class="sh"><h1>How to Approach Task 3</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
+      <div class="ib"><strong>🗺️ Task 3 is about structured thinking, not coding.</strong> Follow this step-by-step process to produce documentation that earns marks at every level.</div>
+      <h3>Step-by-Step Approach</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>Step 1 — Extract requirements from the brief</h3>
+          <p>List every "must" and "should" from the brief, numbered. These become your sub-systems. Ask: <em>"What must the system be able to DO?"</em> Each answer = a sub-system to design.</p>
+        </div>
+        <div class="card ap">
+          <h3>Step 2 — Decompose the system</h3>
+          <p>Draw a hierarchy: <strong>System → Sub-systems → Functions.</strong><br>E.g. Library App → User Login, Book Search, Checkout, Returns → <code>validate_user()</code>, <code>search_by_title()</code>, etc.</p>
+        </div>
+        <div class="card ag">
+          <h3>Step 3 — Design algorithms for each sub-system</h3>
+          <p>For EACH sub-system: draw a <strong>flowchart</strong> (BCS symbols) AND write <strong>pseudocode</strong>. Both must show: sequence, selection (IF/ELSE), and iteration (FOR/WHILE).</p>
+        </div>
+        <div class="card ao">
+          <h3>Step 4 — Define your data structures</h3>
+          <p>What data does the system store and process? Plan variables, lists, dictionaries, file structures or database tables. Name them clearly — this directly feeds your Task 4a code.</p>
+        </div>
+        <div class="card ay">
+          <h3>Step 5 — Design the UI / wireframes</h3>
+          <p>Sketch what the user sees at each stage. Label input fields, buttons, output areas. Show navigation between screens. Keep wireframes annotated — explain design choices.</p>
+        </div>
+        <div class="card apk">
+          <h3>Step 6 — Justify every decision</h3>
+          <p>For each design choice, write WHY. <em>"I used a dictionary rather than a list because lookups by key are O(1) and the system needs to retrieve records by user ID quickly."</em></p>
+        </div>
+      </div>
+      <h3>What the Examiner Checks For</h3>
+      <table>
+        <thead><tr><th>Mark Criterion</th><th>What you need to show</th><th>Common mistake</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Decomposition</strong></td><td>Clear hierarchy — system → sub-systems → named functions</td><td>Only listing sub-systems without breaking into functions</td></tr>
+          <tr><td><strong>Algorithm design</strong></td><td>BOTH flowchart AND pseudocode for each sub-system; all three constructs visible</td><td>Only doing flowcharts OR only doing pseudocode</td></tr>
+          <tr><td><strong>Data structures</strong></td><td>Named variables, data types specified, relationships shown (ERD for databases)</td><td>Just writing "a list" without naming it or specifying what it holds</td></tr>
+          <tr><td><strong>Third-party buildable</strong></td><td>Could a stranger build it from your docs alone? If not, add more detail</td><td>Relying on the examiner to "just know" how something works</td></tr>
+          <tr><td><strong>Technical vocabulary</strong></td><td>Parameter, return value, iteration, Boolean, integer, key-value pair, etc.</td><td>Writing in plain English without any technical terms</td></tr>
+        </tbody>
+      </table>
+      <div class="co"><span class="co-icon">💡</span><div class="co-text"><strong>The golden rule:</strong> For every requirement in the brief, your Task 3 docs should show HOW your design meets it. Number your requirements and reference them — <em>"This <code>validate_login()</code> function addresses requirement 3: the system must validate user credentials before granting access."</em></div></div>
+    </div>
+
     <!-- ===== SLIDE 14: DECOMPOSITION & ALGORITHMS ===== -->
     <div class="slide" id="s14">
       <div class="sh"><h1>Decomposition & Algorithms</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
@@ -732,6 +1046,57 @@ code{
         </tbody>
       </table>
       <div class="ib"><strong>Flowchart reminder:</strong> Use correct BCS symbols — parallelogram for I/O, rectangle for process, diamond for decision, oval for start/end. Incorrect symbols lose marks.</div>
+    </div>
+
+
+    <!-- ===== SLIDE: FLOWCHART SHAPES & MEANINGS ===== -->
+    <div class="slide" id="sflow">
+      <div class="sh"><h1>Flowchart Shapes &amp; Meanings</h1><span class="chip chip-t3">TASK 3 · DESIGN</span></div>
+      <div class="ib y"><strong>⚠️ Use BCS standard symbols only.</strong> Using incorrect shapes is a common cause of lost marks in Task 3. Every shape has a specific meaning — learn them.</div>
+      <h3>BCS Standard Flowchart Symbols</h3>
+      <table>
+        <thead><tr><th>Shape Name</th><th>Appearance</th><th>Meaning &amp; When to Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Terminator</strong></td><td>Rounded rectangle / Oval (pill shape)</td><td><strong>START</strong> or <strong>END</strong> of the flowchart. Every flowchart must have exactly one START and at least one END.</td></tr>
+          <tr><td><strong>Process</strong></td><td>Rectangle (plain box)</td><td>A <strong>computation or action</strong> — e.g. <code>total ← price × quantity</code> or <code>display welcome message</code></td></tr>
+          <tr><td><strong>Decision</strong></td><td>Diamond (rhombus)</td><td>A <strong>yes/no question</strong> or conditional branch — e.g. <code>Is score &gt;= 50?</code>. Must have exactly two exits: YES and NO.</td></tr>
+          <tr><td><strong>Input / Output</strong></td><td>Parallelogram (slanted box)</td><td><strong>Data entering or leaving</strong> the system — e.g. <code>INPUT name</code> or <code>OUTPUT result</code></td></tr>
+          <tr><td><strong>Flow Arrow</strong></td><td>Arrow / Line with arrowhead</td><td>Shows the <strong>direction of flow</strong> between steps. Must always have an arrowhead.</td></tr>
+          <tr><td><strong>Connector</strong></td><td>Small circle with a letter/number</td><td>A <strong>reference point</strong> used when the flowchart continues elsewhere on the page (avoids crossing lines).</td></tr>
+          <tr><td><strong>Sub-process</strong></td><td>Rectangle with double vertical lines on sides</td><td>Calls a <strong>separate named process</strong> / subroutine that is defined elsewhere.</td></tr>
+          <tr><td><strong>Document</strong></td><td>Rectangle with wavy/curved bottom</td><td>Represents a <strong>document or report</strong> produced or consumed by the process.</td></tr>
+        </tbody>
+      </table>
+      <h3>Key Rules</h3>
+      <div class="g3">
+        <div class="card al">
+          <h3>🔄 Sequence, Selection &amp; Iteration</h3>
+          <ul>
+            <li><strong>Sequence:</strong> boxes flow top-to-bottom in order</li>
+            <li><strong>Selection:</strong> diamond with YES/NO branches</li>
+            <li><strong>Iteration:</strong> an arrow looping back to an earlier step</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>⚠️ Common Mistakes</h3>
+          <ul>
+            <li>Using rectangles for decisions (must be diamond)</li>
+            <li>Forgetting START or END terminators</li>
+            <li>Arrows without arrowheads or flowing backwards</li>
+            <li>Diamond with more than two exits</li>
+          </ul>
+        </div>
+        <div class="card ag">
+          <h3>✅ Mark-earning Habits</h3>
+          <ul>
+            <li>Label both exits of every diamond (YES / NO)</li>
+            <li>Ensure every path ends at a terminator</li>
+            <li>Keep flow going left-to-right or top-to-bottom</li>
+            <li>Use sub-process boxes for repeated logic</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib g"><strong>Pseudocode vs Flowcharts:</strong> Both must be present in Task 3. Flowcharts are great for showing decision branches and iteration loops visually. Pseudocode is better for showing precise variable names and data types. Use both together for maximum marks.</div>
     </div>
 
     <!-- ===== SLIDE 15: DESIGN COMMUNICATION ===== -->
@@ -807,6 +1172,47 @@ code{
           </ul>
         </div>
       </div>
+
+      <h3>Programming Techniques to Demonstrate</h3>
+      <div class="g2">
+        <div class="card al">
+          <h3>🔢 Data Structures</h3>
+          <ul>
+            <li><strong>Lists / Arrays</strong> — store and iterate collections</li>
+            <li><strong>Dictionaries</strong> — key-value pairs for structured data</li>
+            <li><strong>Files</strong> — read/write CSV or JSON for persistence</li>
+            <li><strong>Databases</strong> — SQL queries via sqlite3 or similar</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>⚙️ Control Flow</h3>
+          <ul>
+            <li>IF / ELIF / ELSE — selection with multiple branches</li>
+            <li>FOR loops — iterate over collections</li>
+            <li>WHILE loops — condition-controlled repetition</li>
+            <li>Nested loops where appropriate</li>
+          </ul>
+        </div>
+        <div class="card ao">
+          <h3>🧩 Functions &amp; Modules</h3>
+          <ul>
+            <li>Define functions with clear names and docstrings</li>
+            <li>Use parameters and return values correctly</li>
+            <li>Import and use library modules (e.g. math, datetime)</li>
+            <li>No duplicate copy-pasted code</li>
+          </ul>
+        </div>
+        <div class="card ay">
+          <h3>🛡️ Defensive Programming</h3>
+          <ul>
+            <li>Validate all user input before using it</li>
+            <li>Use try/except to catch runtime errors</li>
+            <li>Check for edge cases (empty list, zero divisor, etc.)</li>
+            <li>Give the user clear, friendly error messages</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="ib g"><strong>Note:</strong> Formal test documentation is NOT required in Task 4a — but testing should still take place implicitly. Evidence of testing is a working product that meets the brief requirements.</div>
       <h3>Languages You Can Use</h3>
       <div class="tags">
@@ -862,6 +1268,174 @@ code{
       <div class="co"><span class="co-icon">🖥️</span><div class="co-text">Consistency · Simplified user input · Meaningful output messages · Explanation of what to input · Error messages · Data visualisation (e.g. <strong>Matplotlib</strong> graphs)</div></div>
     </div>
 
+
+    <!-- ===== SLIDE: PANDAS & MATPLOTLIB ===== -->
+    <div class="slide" id="spandas">
+      <div class="sh"><h1>Pandas &amp; Matplotlib</h1><span class="chip chip-t4">TASK 4A · DEVELOPMENT</span></div>
+      <div class="ib y"><strong>📊 These two libraries are explicitly named in the T Level spec.</strong> Pandas handles data — Matplotlib visualises it. Know when and how to use each one, and how to break down a data question.</div>
+      <h3>Pandas — Data Manipulation</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>What Pandas is for</h3>
+          <ul>
+            <li>Reading and writing CSV / Excel / JSON files</li>
+            <li>Storing structured data in a DataFrame (like a spreadsheet in code)</li>
+            <li>Filtering, sorting, grouping, and summarising data</li>
+            <li>Cleaning data — handling missing values, renaming columns</li>
+            <li>Merging multiple data sources together</li>
+          </ul>
+        </div>
+        <div class="card al">
+          <h3>Key Pandas Operations</h3>
+          <ul>
+            <li><code>import pandas as pd</code></li>
+            <li><code>df = pd.read_csv('file.csv')</code> — load data</li>
+            <li><code>df.head()</code> — view first 5 rows</li>
+            <li><code>df['column']</code> — select a column</li>
+            <li><code>df[df['age'] &gt; 18]</code> — filter rows by condition</li>
+            <li><code>df.groupby('region')['sales'].sum()</code> — group + aggregate</li>
+            <li><code>df.sort_values('score', ascending=False)</code> — sort</li>
+            <li><code>df['col'].mean()</code> — calculate average</li>
+            <li><code>df.to_csv('output.csv', index=False)</code> — save results</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Matplotlib — Data Visualisation</h3>
+      <div class="g2">
+        <div class="card ao">
+          <h3>What Matplotlib is for</h3>
+          <ul>
+            <li>Producing graphs to show <strong>trends and patterns</strong> in data</li>
+            <li>Making results visual so non-technical stakeholders can understand them</li>
+            <li><strong>Line charts</strong> — trends over time</li>
+            <li><strong>Bar charts</strong> — comparisons between categories</li>
+            <li><strong>Pie charts</strong> — proportions of a whole</li>
+            <li><strong>Scatter plots</strong> — relationships between two variables</li>
+            <li><strong>Histograms</strong> — distribution of a dataset</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>Key Matplotlib Operations</h3>
+          <ul>
+            <li><code>import matplotlib.pyplot as plt</code></li>
+            <li><code>plt.plot(x, y)</code> — line chart</li>
+            <li><code>plt.bar(categories, values)</code> — bar chart</li>
+            <li><code>plt.pie(values, labels=labels)</code> — pie chart</li>
+            <li><code>plt.scatter(x, y)</code> — scatter plot</li>
+            <li><code>plt.title('My Chart Title')</code> — add title</li>
+            <li><code>plt.xlabel('X axis label')</code> — label x-axis</li>
+            <li><code>plt.ylabel('Y axis label')</code> — label y-axis</li>
+            <li><code>plt.legend()</code> — show legend</li>
+            <li><code>plt.show()</code> — display chart</li>
+            <li><code>plt.savefig('chart.png')</code> — save to file</li>
+          </ul>
+        </div>
+      </div>
+      <h3>How to Break Down a Data Question — Step by Step</h3>
+      <div class="g3">
+        <div class="card al">
+          <h3>1. Identify the data source</h3>
+          <p>Is it a CSV? JSON? Database? Manual input? → Use <code>pd.read_csv()</code> for files, <code>sqlite3</code> for databases, or build a list/dict from user input first.</p>
+        </div>
+        <div class="card ap">
+          <h3>2. What processing is required?</h3>
+          <p>Filter? Sort? Aggregate? Count? Group? Use Pandas operations. Break it into steps: <strong>load → clean → filter → process → output.</strong></p>
+        </div>
+        <div class="card ag">
+          <h3>3. What must the output look like?</h3>
+          <p>Printed table? Graph? Saved file? If the brief says "visualise" → use Matplotlib. <strong>Always label axes and add a title</strong> — unlabelled graphs lose presentation marks.</p>
+        </div>
+      </div>
+      <div class="card ay" style="margin-top:8px">
+        <h3>📝 Worked Mini-Example — Brief: "Load sales data and display a bar chart of total sales by region"</h3>
+        <p style="font-size:16px;line-height:2.1;color:var(--dim)">
+          <strong>Step 1 — Load:</strong> <code>df = pd.read_csv('sales.csv')</code><br>
+          <strong>Step 2 — Process:</strong> <code>by_region = df.groupby('region')['sales'].sum()</code><br>
+          <strong>Step 3 — Visualise:</strong> <code>plt.bar(by_region.index, by_region.values)</code><br>
+          <strong>Step 4 — Label &amp; display:</strong> <code>plt.title('Sales by Region')</code> · <code>plt.xlabel('Region')</code> · <code>plt.ylabel('Total Sales (£)')</code> · <code>plt.show()</code>
+        </p>
+      </div>
+      <div class="ib g"><strong>Mark tip:</strong> Always import both libraries at the top of your file. Add a comment explaining what each Pandas operation does. Examiners reward annotated, readable code — not just code that runs.</div>
+    </div>
+
+    <!-- ===== SLIDE: SYSTEM vs USER REQUIREMENTS ===== -->
+    <div class="slide" id="sreqs">
+      <div class="sh"><h1>System vs User Requirements</h1><span class="chip chip-ev">TASK 4B · EVALUATION</span></div>
+      <div class="ib pk"><strong>📋 The ESP brief contains explicit requirements.</strong> Task 4b asks you to evaluate against them. You need to know what type each requirement is and how to write evidence for each.</div>
+      <h3>The Two Types of Requirements</h3>
+      <div class="g2">
+        <div class="card apk">
+          <h3>👤 User Requirements</h3>
+          <p>What the <strong>user needs the system to do</strong>, written in plain English from the user's perspective. No technical jargon. Focus on the WHAT, not the HOW.</p>
+          <p style="margin-top:8px"><strong>Characteristics:</strong> Written as user stories or plain statements. Usually start with "Users must be able to..." or "The system must allow..."</p>
+          <ul>
+            <li>"Users must be able to log in with a username and password"</li>
+            <li>"The system must display results within 3 seconds"</li>
+            <li>"Staff must be able to generate a monthly sales report"</li>
+            <li>"The app must work on both mobile and desktop"</li>
+          </ul>
+        </div>
+        <div class="card al">
+          <h3>⚙️ System Requirements</h3>
+          <p>The <strong>technical specification</strong> of HOW the system achieves the user requirements. Written for developers. Must be precise and measurable.</p>
+          <p style="margin-top:8px"><strong>Characteristics:</strong> Specify the technical implementation. More precise. Written as technical constraints.</p>
+          <ul>
+            <li>"Passwords shall be hashed using bcrypt before storage"</li>
+            <li>"API responses must be returned in under 500ms under normal load"</li>
+            <li>"Reports shall be exportable as CSV and PDF"</li>
+            <li>"The UI shall be built with responsive CSS and tested at 320px, 768px, 1280px"</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Functional vs Non-Functional Requirements</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>✅ Functional Requirements</h3>
+          <p><strong>WHAT</strong> the system must do — specific features and behaviours. Testable by checking "does this feature exist and work?"</p>
+          <ul>
+            <li>The system must allow users to register an account</li>
+            <li>The system must calculate order totals correctly</li>
+            <li>The system must send a confirmation email on purchase</li>
+            <li>The system must validate that ages are between 0 and 120</li>
+          </ul>
+          <p style="margin-top:8px"><strong>Evaluate by:</strong> "Does the feature exist and produce the correct output?"</p>
+        </div>
+        <div class="card ao">
+          <h3>📏 Non-Functional Requirements</h3>
+          <p><strong>HOW</strong> the system performs — quality attributes that cut across all features.</p>
+          <ul>
+            <li><strong>Performance:</strong> Response time, speed under load</li>
+            <li><strong>Security:</strong> Input validation, data protection, hashing</li>
+            <li><strong>Usability:</strong> Ease of use, accessibility, clear messages</li>
+            <li><strong>Reliability:</strong> Uptime, error recovery, exception handling</li>
+            <li><strong>Maintainability:</strong> Clear code, comments, modular design</li>
+          </ul>
+          <p style="margin-top:8px"><strong>Evaluate by:</strong> "How well does it perform against these quality criteria?"</p>
+        </div>
+      </div>
+      <h3>How to Write Your Evaluation Against Requirements</h3>
+      <div class="g2">
+        <div class="card ay">
+          <h3>Evaluation Structure</h3>
+          <ul>
+            <li><strong>1.</strong> List each requirement from the brief (by name or number)</li>
+            <li><strong>2.</strong> State whether your solution meets it — fully, partially, or not</li>
+            <li><strong>3.</strong> Provide specific evidence (test results, screenshots, code reference)</li>
+            <li><strong>4.</strong> If not fully met — acknowledge it honestly and propose the specific fix</li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>Sentence Templates</h3>
+          <ul>
+            <li><em>"User requirement [X] stated that [requirement]. My solution meets this because [specific evidence from testing]."</em></li>
+            <li><em>"The functional requirement for [X] is fully met — test [Y] confirmed that [result]."</em></li>
+            <li><em>"Non-functional requirement [security] is partially met — input is validated but passwords are stored as plaintext. To improve this I would implement bcrypt hashing."</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ib g"><strong>Key exam insight:</strong> The ESP brief contains explicit success criteria — these ARE your requirements. Reference them by number or exact wording in your evaluation. Don't write generally about "user needs" — quote the actual criterion from the brief and prove you've met it with evidence.</div>
+    </div>
+
     <!-- ===== SLIDE 19: TASK 4b EVALUATION ===== -->
     <div class="slide" id="s19">
       <div class="sh"><h1>Task 4b: Reflective Evaluation</h1><span class="chip chip-ev">TASK 4B · EVALUATION</span></div>
@@ -900,6 +1474,45 @@ code{
           </ul>
         </div>
       </div>
+
+      <h3>Sentence Starters by Section</h3>
+      <div class="g2">
+        <div class="card ag">
+          <h3>✅ Evidence of Success</h3>
+          <ul>
+            <li><em>"My solution meets criterion [X] because when [action], the system [outcome]…"</em></li>
+            <li><em>"I validated the requirement that [X] by running test [Y], which produced [result]…"</em></li>
+            <li><em>"The brief stated [requirement]. My solution addresses this by [specific feature]…"</em></li>
+          </ul>
+        </div>
+        <div class="card al">
+          <h3>👤 User Needs Evidence</h3>
+          <ul>
+            <li><em>"User testing showed that [user type] was able to [task] in [time/steps]…"</em></li>
+            <li><em>"Feedback indicated that [feature] was clearly understood because [evidence]…"</em></li>
+            <li><em>"The interface met accessibility expectations by [specific design choice]…"</em></li>
+          </ul>
+        </div>
+        <div class="card ap">
+          <h3>🔧 Improvements</h3>
+          <ul>
+            <li><em>"If I revisited this project, I would improve [X] by [specific action] because this would [benefit]…"</em></li>
+            <li><em>"A limitation of my current solution is [X]. To resolve this I would [action]…"</em></li>
+            <li><em>"With more time I would have implemented [feature] because [justification]…"</em></li>
+          </ul>
+        </div>
+        <div class="card ao">
+          <h3>📊 Evaluation Checklist</h3>
+          <ul>
+            <li>☐ Every success criterion from the brief addressed</li>
+            <li>☐ Specific test evidence referenced (not vague)</li>
+            <li>☐ At least 3 distinct, specific improvements named</li>
+            <li>☐ No phrases like "I think it went well"</li>
+            <li>☐ Technical vocabulary used throughout</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="ib g"><strong>Reflection vs Evaluation:</strong> Reflection asks "what happened?" — Evaluation asks "how well did it meet requirements and what could be better?" Aim for evaluation, not just description.</div>
     </div>
 
@@ -933,29 +1546,36 @@ code{
 
 <script>
 const SLIDES=[
-  {id:'s0', label:'Introduction',           group:'OVERVIEW',        chip:'chip-intro', chipText:'INTRO'},
-  {id:'s1', label:'ESP at a Glance',        group:'OVERVIEW',        chip:'chip-intro', chipText:'OVERVIEW'},
-  {id:'s2', label:'Assessment Objectives',  group:'OVERVIEW',        chip:'chip-intro', chipText:'OVERVIEW'},
-  {id:'s3', label:'Pre-task: Familiarisation', group:'PRE-TASK',     chip:'chip-pre',   chipText:'PRE-TASK'},
-  {id:'s4', label:'Task 1 Overview',        group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
-  {id:'s5', label:'Gantt Charts in Depth',  group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
-  {id:'s6', label:'Resource & Cost Plan',   group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
-  {id:'s7', label:'Rationale',              group:'TASK 1 · PLANNING', chip:'chip-t1', chipText:'TASK 1'},
-  {id:'s8', label:'Quiz: Task 1 Planning',  group:'TASK 1 · PLANNING', chip:'chip-quiz', chipText:'QUIZ'},
-  {id:'s9', label:'Task 2 Overview',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
-  {id:'s10',label:'Test Data Types',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
-  {id:'s11',label:'Fixing the Code',        group:'TASK 2 · TESTING', chip:'chip-t2', chipText:'TASK 2'},
-  {id:'s12',label:'Quiz: Task 2 Testing',   group:'TASK 2 · TESTING', chip:'chip-quiz', chipText:'QUIZ'},
-  {id:'s13',label:'Task 3 Overview',        group:'TASK 3 · DESIGN',  chip:'chip-t3', chipText:'TASK 3'},
-  {id:'s14',label:'Decomposition & Algorithms', group:'TASK 3 · DESIGN', chip:'chip-t3', chipText:'TASK 3'},
-  {id:'s15',label:'Design Communication',   group:'TASK 3 · DESIGN',  chip:'chip-t3', chipText:'TASK 3'},
-  {id:'s16',label:'Quiz: Task 3 Design',    group:'TASK 3 · DESIGN',  chip:'chip-quiz', chipText:'QUIZ'},
-  {id:'s17',label:'Task 4a: Development',   group:'TASK 4 · DEVELOP', chip:'chip-t4', chipText:'TASK 4A'},
-  {id:'s18',label:'Code Organisation',      group:'TASK 4 · DEVELOP', chip:'chip-t4', chipText:'TASK 4A'},
-  {id:'s19',label:'Task 4b: Evaluation',    group:'TASK 4B · EVALUATION', chip:'chip-ev', chipText:'TASK 4B'},
-  {id:'s20',label:'Quiz: Tasks 4a & 4b',    group:'TASK 4B · EVALUATION', chip:'chip-quiz', chipText:'QUIZ'},
-  {id:'s21',label:'Mega Quiz — All Tasks',  group:'MEGA QUIZ',        chip:'chip-quiz', chipText:'MEGA'},
-  {id:'s22',label:'Your Results',           group:'FINAL SCORE',      chip:'chip-quiz', chipText:'SCORE'},
+  {id:'s0',  label:'Introduction',                  group:'OVERVIEW',           chip:'chip-intro', chipText:'INTRO'},
+  {id:'s1',  label:'ESP at a Glance',               group:'OVERVIEW',           chip:'chip-intro', chipText:'OVERVIEW'},
+  {id:'s2',  label:'Assessment Objectives',         group:'OVERVIEW',           chip:'chip-intro', chipText:'OVERVIEW'},
+  {id:'sexam',label:'Exam Strategy',                group:'OVERVIEW',           chip:'chip-intro', chipText:'STRATEGY'},
+  {id:'s3',  label:'Pre-task: Familiarisation',     group:'PRE-TASK',           chip:'chip-pre',   chipText:'PRE-TASK'},
+  {id:'s4',  label:'Task 1 Overview',               group:'TASK 1 · PLANNING',  chip:'chip-t1',    chipText:'TASK 1'},
+  {id:'s5',  label:'Gantt Charts in Depth',         group:'TASK 1 · PLANNING',  chip:'chip-t1',    chipText:'TASK 1'},
+  {id:'s6',  label:'Resource & Cost Plan',          group:'TASK 1 · PLANNING',  chip:'chip-t1',    chipText:'TASK 1'},
+  {id:'s7',  label:'Rationale',                     group:'TASK 1 · PLANNING',  chip:'chip-t1',    chipText:'TASK 1'},
+  {id:'smaths',label:'Task 1: Maths & Calculations',group:'TASK 1 · PLANNING',  chip:'chip-t1',    chipText:'TASK 1'},
+  {id:'s8',  label:'Quiz: Task 1 Planning',         group:'TASK 1 · PLANNING',  chip:'chip-quiz',  chipText:'QUIZ'},
+  {id:'s9',  label:'Task 2 Overview',               group:'TASK 2 · TESTING',   chip:'chip-t2',    chipText:'TASK 2'},
+  {id:'s10', label:'Test Data Types',               group:'TASK 2 · TESTING',   chip:'chip-t2',    chipText:'TASK 2'},
+  {id:'stypes',label:'Testing Types',               group:'TASK 2 · TESTING',   chip:'chip-t2',    chipText:'TASK 2'},
+  {id:'s11', label:'Fixing the Code',               group:'TASK 2 · TESTING',   chip:'chip-t2',    chipText:'TASK 2'},
+  {id:'s12', label:'Quiz: Task 2 Testing',          group:'TASK 2 · TESTING',   chip:'chip-quiz',  chipText:'QUIZ'},
+  {id:'s13', label:'Task 3 Overview',               group:'TASK 3 · DESIGN',    chip:'chip-t3',    chipText:'TASK 3'},
+  {id:'sapproach',label:'How to Approach Task 3',   group:'TASK 3 · DESIGN',    chip:'chip-t3',    chipText:'TASK 3'},
+  {id:'s14', label:'Decomposition & Algorithms',    group:'TASK 3 · DESIGN',    chip:'chip-t3',    chipText:'TASK 3'},
+  {id:'sflow',label:'Flowchart Shapes & Meanings',  group:'TASK 3 · DESIGN',    chip:'chip-t3',    chipText:'TASK 3'},
+  {id:'s15', label:'Design Communication',          group:'TASK 3 · DESIGN',    chip:'chip-t3',    chipText:'TASK 3'},
+  {id:'s16', label:'Quiz: Task 3 Design',           group:'TASK 3 · DESIGN',    chip:'chip-quiz',  chipText:'QUIZ'},
+  {id:'s17', label:'Task 4a: Development',          group:'TASK 4 · DEVELOP',   chip:'chip-t4',    chipText:'TASK 4A'},
+  {id:'s18', label:'Code Organisation',             group:'TASK 4 · DEVELOP',   chip:'chip-t4',    chipText:'TASK 4A'},
+  {id:'spandas',label:'Pandas & Matplotlib',        group:'TASK 4 · DEVELOP',   chip:'chip-t4',    chipText:'TASK 4A'},
+  {id:'sreqs',label:'System vs User Requirements',  group:'TASK 4B · EVALUATION',chip:'chip-ev',   chipText:'TASK 4B'},
+  {id:'s19', label:'Task 4b: Evaluation',           group:'TASK 4B · EVALUATION',chip:'chip-ev',   chipText:'TASK 4B'},
+  {id:'s20', label:'Quiz: Tasks 4a & 4b',           group:'TASK 4B · EVALUATION',chip:'chip-quiz', chipText:'QUIZ'},
+  {id:'s21', label:'Mega Quiz — All Tasks',         group:'MEGA QUIZ',           chip:'chip-quiz',  chipText:'MEGA'},
+  {id:'s22', label:'Your Results',                  group:'FINAL SCORE',         chip:'chip-quiz',  chipText:'SCORE'},
 ];
 
 const QUIZ={
@@ -1157,7 +1777,7 @@ function renderFinal(){
     +'<div class="score-sub">'+got+' / '+tot+' questions correct</div>'
     +'<p class="score-msg">'+msg+'</p>'
     +'<div class="score-grid">'+breakdown+'</div>'
-    +'<button class="nbtn" onclick="goTo(0)" style="margin:0 auto;display:flex;padding:10px 28px;">🔄 Start Over</button>'
+    +'<button class="nbtn" onclick="resetAll()" style="margin:0 auto;display:flex;padding:10px 28px;">🔄 Start Over</button>'
     +'<div class="ib" style="margin-top:24px;text-align:left"><strong>ESP info:</strong> 14h 30min · 100 marks · 40% of core assessments. Five tasks: Pre-task (unassessed), Task 1 (Planning), Task 2 (Testing & Debugging), Task 3 (Design), Task 4a (Development), Task 4b (Evaluation). No internet. No AI tools.</div>'
     +'</div>';
 }
@@ -1232,9 +1852,40 @@ function closeSidebar(){
   document.getElementById('sidebar-overlay').classList.remove('open');
 }
 
+
+// ── LIGHT/DARK MODE (apply saved theme first) ──
+(function(){
+  const saved = localStorage.getItem('theme');
+  if(saved === 'light') document.documentElement.classList.add('light');
+})();
+
+// Set initial theme button icon (after saved theme is applied)
+(function(){
+  const btn = document.getElementById('theme-btn');
+  if(btn) btn.textContent = document.documentElement.classList.contains('light') ? '☀️' : '🌙';
+})();
+
+function resetAll(){
+  Object.keys(state).forEach(k=>{
+    state[k].s=0;
+    state[k].a=state[k].a.map(()=>false);
+  });
+  ['qt1','qt2','qt3','qt4','qmega'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){delete el.dataset.r;el.innerHTML='';}
+  });
+  const fin=document.getElementById('qfinal');
+  if(fin)fin.innerHTML='';
+  goTo(0);
+}
+
 buildTOC();buildDots();updateUI();renderFinal();
+function toggleTheme(){
+  const isLight = document.documentElement.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isLight ? '☀️' : '🌙';
+}
+
 </script>
-<script src="../load-lib.js"></script>
-<script src="../index.js"></script>
 </body>
 </html>
