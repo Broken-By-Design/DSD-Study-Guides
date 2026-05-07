@@ -1,3 +1,5 @@
+#!/bin/bash
+cat << 'CSS' > shared.css
 /* Base / Light Mode */
 :root,
 [data-theme="light"] {
@@ -267,3 +269,4 @@ footer {
   padding-top: 1rem;
   border-top: 1px solid var(--pico-card-border-color);
 }
+CSS
