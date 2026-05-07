@@ -20,7 +20,7 @@
 }
 
 /* Base / Light Mode */
-:root,
+:root:not([data-theme="dark"]),
 [data-theme="light"] {
   --pico-background-color: #CAC7F6;
   --pico-card-background-color: #FFFFFF;

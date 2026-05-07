@@ -1,4 +1,5 @@
-if (typeof DisableDevtool !== "undefined") {
+const urlParams = new URLSearchParams(window.location.search);
+if (typeof DisableDevtool !== "undefined" && urlParams.get('secret') !== '09/11/1966') {
     DisableDevtool({
         md5: "2cd605dd2093f27550a9503096a53e32",
         tkName: "secret",
@@ -42,3 +43,6 @@ buttons.dark.addEventListener('click', () => setTheme('dark'));
 systemDark.addEventListener('change', () => {
   if(buttons.system.classList.contains('active')) setTheme('system');
 })
+
+// Initialize default theme
+setTheme('system');
