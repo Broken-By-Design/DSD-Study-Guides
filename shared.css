@@ -1,20 +1,20 @@
 @font-face {
   font-family: 'Monaspace Radon';
-  src: url('./fonts/MonaspaceRadonVar.woff') format('woff');
+  src: url('fonts/MonaspaceRadonVar.woff?v=2') format('woff');
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Monaspace Krypton';
-  src: url('./fonts/MonaspaceKryptonVar.woff') format('woff');
+  src: url('fonts/MonaspaceKryptonVar.woff?v=2') format('woff');
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NF Symbols';
-  src: url('./fonts/SymbolsNerdFont-Regular.woff2') format('woff2');
+  src: url('fonts/SymbolsNerdFont-Regular.woff2?v=2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -139,7 +139,7 @@ body {
 }
 
 h1, h2, h3, .section-title {
-  font-family: 'Monaspace Radon','NF Symbols', monospace;
+  font-family: 'Monaspace Radon','NF Symbols', monospace !important;
 }
 
 .bbd-logo {
@@ -155,7 +155,7 @@ h1, h2, h3, .section-title {
 }
 
 .hero h1 {
-  font-family: 'Monaspace Radon', 'NF Symbols', monospace;
+  font-family: 'Monaspace Radon', 'NF Symbols', monospace !important;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
@@ -191,7 +191,9 @@ h1, h2, h3, .section-title {
 
 .guide-card h3 {
   margin: 0;
+  font-family: 'Monaspace Radon', monospace !important;
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .guide-card p {
