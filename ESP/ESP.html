@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>ESP section</title>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+      />
+      <link rel="stylesheet" href="../shared.css?v=1.4">
+      <link rel="preload" href="../fonts/MonaspaceRadonVar.woff" as="font" type="font/woff" crossorigin>
+      <link rel="preload" href="../fonts/SymbolsNerdFont-Regular.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+      <link rel="icon" type="image/png" href="../icon/favicon.ico">
+      <link rel="apple-touch-icon" href="../icon/apple-touch-icon.png">
+    </head>
+
+    <body>
+        <main class="container">
+            <div class="hero">
+                <h1>ESP</h1>
+                <p>This is a page with a collection of tools for the ESP on It</p>
+            </div>
+
+            <hr>
+
+            <section>
+                <p class="section-title">Tools</p>
+                <div class="card-grid">
+                    <article class="guide-card">
+                        <span class="badge">New Spec!</span>
+                        <h3>ESP Slide deck</h3>
+                        <p>A slide deck on the whole of the ESP!</p>
+                        <a href="../guides/ESP.html" role="button">Open ESP Slide deck -></a>
+                    </article>
+
+                    <article class=guide-card>
+                        <span class="badge">Task 4a</span>
+                        <h3>Task 4a functions</h3>
+                        <p>A cheat sheet full of the useful functions for Task 4a</p>
+                        <a href="../ESP/Task4a_funcs.html" role="button">Open Cheatsheet -></a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <hr>
+
+        <footer class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <p style="margin: 0 0 0.5rem;"><strong>Made for DSD T-Level students</strong></p>
+                    <p style="margin: 0 0 0.5rem; color: var(--pico-muted-color); font-size: 0.85rem;">
+                        A collab between HRC DSD students <br> and Broken By Design:
+                    </p>
+                    <div class="collab">
+                        <span class="collab-chip">Ag</span>
+                        <span class="collab-chip owner"><span>Rs &lt;/b&gt;</span></span>
+                    </div>
+                    <div class="collab">
+                        <span class="collab-chip">Tp</span>
+                        <span class="collab-chip owner"><span>Vp &lt;/b&gt;</span></span>
+                    </div>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--pico-muted-color);">Theme</p>
+                    <div class="segment">
+                        <button id="btn-system" title="System" class="active">󰌢</button>
+                        <button id="btn-light" title="Light"></button>
+                        <button id="btn-dark" title="Dark"></button>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="../load-lib.js"></script>
+        <script src="../index.js"></script>
+    </body>
+</html>
