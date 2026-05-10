@@ -48,3 +48,12 @@ systemDark.addEventListener('change', () => {
 // Initialize theme from localStorage or default to system
 const savedTheme = localStorage.getItem('theme') || 'system';
 setTheme(savedTheme);
+
+[
+  '/components/site-navbar.js',
+  '/components/site-footer.js'
+].forEach(src => {
+  const s = document.createElement('script')
+  s.src = src
+  document.head.appendChild(s)
+})
