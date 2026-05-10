@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Python IDE - DSD Study Guides</title>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+      />
+      <link rel="stylesheet" href="../shared.css?v=1.4">
+      <link rel="preload" href="../fonts/MonaspaceRadonVar.woff" as="font" type="font/woff" crossorigin>
+      <link rel="preload" href="../fonts/SymbolsNerdFont-Regular.woff2" as="font" type="font/woff2" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+      <link rel="icon" type="image/png" href="../icon/favicon.ico">
+      <link rel="apple-touch-icon" href="../icon/apple-touch-icon.png">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+      <style>
+        :root {
+          --ide-bg: #1e1e2e;
+          --ide-sidebar: #181825;
+          --ide-border: #313244;
+          --ide-active: #45475a;
+          --ide-text: #cdd6f4;
+          --ide-comment: #6c7086;
+          --ide-keyword: #cba6f7;
+          --ide-string: #a6e3a1;
+          --ide-number: #fab387;
+        }
+        [data-theme="light"] {
+          --ide-bg: #eff1f5;
+          --ide-sidebar: #e6e9ef;
+          --ide-border: #ccd0da;
+          --ide-active: #bcc0cc;
+          --ide-text: #4c4f69;
+          --ide-comment: #9ca0b0;
+          --ide-keyword: #8839ef;
+          --ide-string: #40a02b;
+          --ide-number: #fe640b;
+        }
+        .ide-container {
+          display: grid;
+          grid-template-columns: 280px 1fr;
+          grid-template-rows: auto 1fr auto;
+          height: calc(100vh - 140px);
+          gap: 0;
+          border: 1px solid var(--ide-border);
+          border-radius: 8px;
+          overflow: hidden;
+          background: var(--ide-bg);
+        }
+        .ide-header {
+          grid-column: 1 / -1;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          background: var(--ide-sidebar);
+          border-bottom: 1px solid var(--ide-border);
+        }
+        .ide-header h3 {
+          margin: 0;
+          font-size: 0.95rem;
+          color: var(--ide-text);
+          font-family: 'Monaspace Radon', monospace;
+        }
+        .ide-header-actions {
+          display: flex;
+          gap: 0.5rem;
+        }
+        .ide-sidebar {
+          background: var(--ide-sidebar);
+          border-right: 1px solid var(--ide-border);
+          overflow-y: auto;
+          padding: 0.5rem;
+        }
+        .ide-sidebar h4 {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--ide-comment);
+          margin: 0.75rem 0 0.5rem 0.5rem;
+        }
+        .file-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 0.75rem;
+          border-radius: 6px;
+          cursor: pointer;
+          color: var(--ide-text);
+          font-size: 0.85rem;
+          transition: background 0.15s;
+        }
+        .file-item:hover {
+          background: var(--ide-active);
+        }
+        .file-item.active {
+          background: var(--pico-primary);
+          color: #fff;
+        }
+        .file-item svg {
+          width: 16px;
+          height: 16px;
+          opacity: 0.7;
+        }
+        .file-item span {
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .ide-main {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .code-editor-wrapper {
+          flex: 1;
+          overflow: hidden;
+        }
+        .CodeMirror {
+          height: 100% !important;
+          font-family: 'Monaspace Radon', 'Fira Code', monospace !important;
+          font-size: 14px;
+          line-height: 1.6;
+        }
+        .output-panel {
+          height: 200px;
+          border-top: 1px solid var(--ide-border);
+          background: var(--ide-sidebar);
+          display: flex;
+          flex-direction: column;
+        }
+        .output-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.5rem 1rem;
+          border-bottom: 1px solid var(--ide-border);
+        }
+        .output-header span {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--ide-comment);
+        }
+        .output-content {
+          flex: 1;
+          overflow-y: auto;
+          padding: 1rem;
+          font-family: 'Monaspace Radon', monospace;
+          font-size: 13px;
+          color: var(--ide-text);
+          white-space: pre-wrap;
+          word-break: break-all;
+        }
+        .output-content .error {
+          color: #f38ba8;
+        }
+        .output-content .success {
+          color: #a6e3a1;
+        }
+        .loading-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.7);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+        }
+        .loading-box {
+          background: var(--ide-sidebar);
+          padding: 2rem;
+          border-radius: 12px;
+          text-align: center;
+          color: var(--ide-text);
+        }
+        .loading-spinner {
+          width: 40px;
+          height: 40px;
+          border: 3px solid var(--ide-border);
+          border-top-color: var(--pico-primary);
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        .py-btn {
+          background: var(--pico-primary);
+          color: #fff;
+          border: none;
+          padding: 0.4rem 0.8rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.85rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          transition: background 0.2s;
+        }
+        .py-btn:hover {
+          background: var(--pico-primary-hover);
+        }
+        .py-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .secondary-btn {
+          background: var(--ide-active);
+          color: var(--ide-text);
+          border: none;
+          padding: 0.4rem 0.8rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.85rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          transition: background 0.2s;
+        }
+        .secondary-btn:hover {
+          background: var(--ide-border);
+        }
+        .plot-container {
+          margin: 1rem 0;
+          text-align: center;
+        }
+        .plot-container img {
+          max-width: 100%;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .status-indicator {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #f38ba8;
+          margin-right: 0.5rem;
+        }
+        .status-indicator.ready {
+          background: #a6e3a1;
+        }
+        .clear-btn {
+          background: transparent;
+          border: 1px solid var(--ide-border);
+          color: var(--ide-comment);
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 0.75rem;
+        }
+        .clear-btn:hover {
+          background: var(--ide-active);
+          color: var(--ide-text);
+        }
+        @media (max-width: 768px) {
+          .ide-container {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 200px 1fr auto;
+          }
+          .ide-sidebar {
+            border-right: none;
+            border-bottom: 1px solid var(--ide-border);
+            max-height: 200px;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <main class="container">
+        <div class="hero">
+          <h1>Python IDE</h1>
+          <p>Run Python code directly in your browser with pandas & matplotlib support</p>
+        </div>
+        
+        <div class="ide-container">
+          <div class="ide-header">
+            <h3>
+              <span class="status-indicator" id="statusIndicator"></span>
+              <span id="currentFileName">Select a file or upload</span>
+            </h3>
+            <div class="ide-header-actions">
+              <input type="file" id="fileInput" accept=".py" style="display: none;">
+              <button class="secondary-btn" id="uploadBtn" title="Upload Python file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Upload
+              </button>
+              <button class="secondary-btn" id="copyBtn" title="Copy code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+              <button class="py-btn" id="runBtn" disabled>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Run Code
+              </button>
+            </div>
+          </div>
+          
+          <div class="ide-sidebar">
+            <h4>Python Files</h4>
+            <div id="fileList"></div>
+          </div>
+          
+          <div class="ide-main">
+            <div class="code-editor-wrapper">
+              <textarea id="codeEditor"></textarea>
+            </div>
+            <div class="output-panel">
+              <div class="output-header">
+                <span>Output</span>
+                <button class="clear-btn" id="clearOutput">Clear</button>
+              </div>
+              <div class="output-content" id="outputContent">
+                <span class="success">Loading Python runtime...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-box">
+          <div class="loading-spinner"></div>
+          <p>Initializing Python Environment</p>
+          <small style="color: var(--ide-comment)">This may take a moment on first load</small>
+        </div>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+      <script>
+        const pythonFiles = [
+          { name: "Demo.py", path: "Task_4a/4a_revis_activity/Demo.py" },
+          { name: "CodeFixes.py", path: "Task2_examp/CodeFixes.py" },
+          { name: "ExampleBarChart.py", path: "Pandas_mpl_examp/ExampleBarChart.py" },
+          { name: "ExampleLineChart.py", path: "Pandas_mpl_examp/ExampleLineChart.py" },
+          { name: "ExamplePieChart.py", path: "Pandas_mpl_examp/ExamplePieChart.py" },
+          { name: "ExampleScatterChart.py", path: "Pandas_mpl_examp/ExampleScatterChart.py" },
+          { name: "RandomDemos.py", path: "Pandas_mpl_examp/RandomDemos.py" },
+          { name: "PandasAndMatplotlibDemoAgain.py", path: "Task_4a/4a_practice/PandasAndMatplotlibDemoAgain.py" },
+          { name: "Task4a_FINISHED_Mostly.py", path: "Task_4a/Retailx_ltd/Task4a_FINISHED_Mostly.py" },
+          { name: "DSD_ESP_Task4a_Code_Grade_A_Example.py", path: "FULL_ESP_Example/DSD_Grade_A_Example_Work/DSD_ESP_Task4a_Code_Grade_A_Example.py" },
+          { name: "DSD_ESP_Task2_Code_Grade_A_Example.py", path: "FULL_ESP_Example/DSD_Grade_A_Example_Work/DSD_ESP_Task2_Code_Grade_A_Example.py" },
+          { name: "Task4a_gurrebs.py", path: "Task_4a/Gurrebs_BBQ/Task4a_gurrebs.py" },
+          { name: "BuiltInFunctionsToCopy.py", path: "Pandas_mpl_examp/BuiltInFunctionsToCopy.py" },
+          { name: "LineGraphDemo.py", path: "Pandas_mpl_examp/LineGraphDemo.py" },
+        ];
+
+        let editor;
+        let pyodide = null;
+        let currentFilePath = null;
+
+        async function initPyodide() {
+          try {
+            pyodide = await loadPyodide({
+              indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+            });
+            
+            await pyodide.loadPackage(["micropip", "numpy", "pandas", "matplotlib"]);
+            
+            pyodide.runPython(`
+import matplotlib
+matplotlib.use('AGG')
+import matplotlib.pyplot as plt
+import io
+import base64
+import sys
+from io import StringIO
+
+class OutputCapture:
+    def __init__(self):
+        self.outputs = []
+        
+    def write(self, text):
+        if text.strip():
+            self.outputs.append(text)
+            
+    def get_output(self):
+        return ''.join(self.outputs)
+    
+    def clear(self):
+        self.outputs = []
+
+_output_capture = OutputCapture()
+
+def get_plot_base64():
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#181825')
+    buf.seek(0)
+    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    plt.close('all')
+    return img_base64
+
+def run_with_output(code):
+    global _output_capture
+    _output_capture = OutputCapture()
+    
+    old_stdout = sys.stdout
+    sys.stdout = _output_capture
+    
+    try:
+        exec(code, {})
+        output = _output_capture.get_output()
+        
+        if plt.get_fignums():
+            plot_data = get_plot_base64()
+            sys.stdout = old_stdout
+            return output, plot_data
+        else:
+            sys.stdout = old_stdout
+            return output, None
+    except Exception as e:
+        sys.stdout = old_stdout
+        return f"Error: {str(e)}", None
+            `);
+            
+            document.getElementById('statusIndicator').classList.add('ready');
+            document.getElementById('outputContent').innerHTML = '<span class="success">Python ready! Select a file to run.</span>';
+            document.getElementById('loadingOverlay').style.display = 'none';
+            document.getElementById('runBtn').disabled = false;
+            
+          } catch (err) {
+            document.getElementById('outputContent').innerHTML = '<span class="error">Failed to load Python: ' + err.message + '</span>';
+            document.getElementById('loadingOverlay').style.display = 'none';
+          }
+        }
+
+        function initEditor() {
+          editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+            mode: 'python',
+            theme: 'dracula',
+            lineNumbers: true,
+            indentUnit: 4,
+            tabSize: 4,
+            indentWithTabs: false,
+            lineWrapping: true,
+            autofocus: true
+          });
+          
+          const theme = document.documentElement.getAttribute('data-theme');
+          if (theme === 'light') {
+            editor.setOption('theme', 'default');
+          }
+        }
+
+        function renderFileList() {
+          const fileList = document.getElementById('fileList');
+          fileList.innerHTML = '';
+          
+          pythonFiles.forEach(file => {
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                <polyline points="13 2 13 9 20 9"></polyline>
+              </svg>
+              <span>${file.name}</span>
+            `;
+            item.addEventListener('click', (e) => loadFile(file, e.currentTarget));
+            fileList.appendChild(item);
+          });
+        }
+
+        async function loadFile(file, element) {
+          document.querySelectorAll('.file-item').forEach(item => item.classList.remove('active'));
+          if (element) element.classList.add('active');
+          
+          currentFilePath = file.path;
+          document.getElementById('currentFileName').textContent = file.name;
+          
+          try {
+            const response = await fetch(file.path);
+            const content = await response.text();
+            editor.setValue(content);
+            document.getElementById('outputContent').innerHTML = '<span style="color: var(--ide-comment)">Loaded ' + file.name + '. Click "Run Code" to execute.</span>';
+          } catch (err) {
+            editor.setValue('# Could not load file\nprint("Error: File not found - ' + file.path + '")');
+          }
+        }
+
+        async function runCode() {
+          const code = editor.getValue();
+          const outputEl = document.getElementById('outputContent');
+          
+          outputEl.innerHTML = '<span style="color: var(--ide-comment)">Running...</span>';
+          
+          try {
+            const result = pyodide.runPython(`
+result = run_with_output(${JSON.stringify(code)})
+result
+`);
+            
+            const [output, plotData] = result.toJs();
+            
+            let html = '';
+            if (output) {
+              html += '<div>' + escapeHtml(output) + '</div>';
+            }
+            if (plotData) {
+              html += '<div class="plot-container"><img src="data:image/png;base64,' + plotData + '" alt="Plot"></div>';
+            }
+            if (!output && !plotData) {
+              html = '<span style="color: var(--ide-comment)">Code executed successfully (no output)</span>';
+            }
+            
+            outputEl.innerHTML = html;
+            
+          } catch (err) {
+            outputEl.innerHTML = '<span class="error">' + escapeHtml(err.message) + '</span>';
+          }
+        }
+
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        function copyCode() {
+          const code = editor.getValue();
+          navigator.clipboard.writeText(code).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            setTimeout(() => {
+              btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+            }, 2000);
+          });
+        }
+
+        function clearOutput() {
+          document.getElementById('outputContent').innerHTML = '<span style="color: var(--ide-comment)">Output cleared.</span>';
+        }
+
+        document.getElementById('runBtn').addEventListener('click', runCode);
+        document.getElementById('copyBtn').addEventListener('click', copyCode);
+        document.getElementById('clearOutput').addEventListener('click', clearOutput);
+        
+        document.getElementById('uploadBtn').addEventListener('click', () => {
+          document.getElementById('fileInput').click();
+        });
+        
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              editor.setValue(event.target.result);
+              currentFilePath = file.name;
+              document.getElementById('currentFileName').textContent = file.name;
+              document.getElementById('outputContent').innerHTML = '<span style="color: var(--ide-comment)">Loaded ' + file.name + '. Click "Run Code" to execute.</span>';
+            };
+            reader.readAsText(file);
+          }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            runCode();
+          }
+        });
+
+        initEditor();
+        renderFileList();
+        initPyodide();
+      </script>
+    </body>
+</html>
