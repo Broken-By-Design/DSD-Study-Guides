@@ -49,11 +49,14 @@ systemDark.addEventListener('change', () => {
 const savedTheme = localStorage.getItem('theme') || 'system';
 setTheme(savedTheme);
 
+// Load components relative to this script's location
+const scriptSrc = document.currentScript ? document.currentScript.src : '';
+const base = scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1);
+
 [
-  '/components/site-navbar.js',
-  '/components/site-footer.js'
+  'components/site-footer.js'
 ].forEach(src => {
   const s = document.createElement('script')
-  s.src = src
+  s.src = base + src
   document.head.appendChild(s)
 })
