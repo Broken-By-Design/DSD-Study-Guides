@@ -1,5 +1,10 @@
 # DSD-Study-Guides
 This is just a collection of study guides for the T-level in Digital software development from pearson
+
+## IMPENDING RE-WRITE!
+I recently learnt vue as a frameworks and will be switching this project over to vue
+Vue is a great framework that makes web dev better in my opinion
+Please be patient as this will take me some time as I am not a front end dev!
 ---
 Currently located [here](superduperstudies.site) tho this sites domain will not be refreshed when it expires!  
 
