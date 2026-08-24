@@ -6,9 +6,9 @@ I recently learnt vue as a frameworks and will be switching this project over to
 Vue is a great framework that makes web dev better in my opinion  
 Please be patient as this will take me some time as I am not a front end dev!
 ---
-Currently located at [superduperstudies.site](https://superduperstudies.site){:target="_blank"} tho this sites domain will not be refreshed when it expires!  
+Currently located at [superduperstudies.site](https://superduperstudies.site) tho this sites domain will not be refreshed when it expires!  
 
-Will be moved to [dsd.brokenbydesign.xyz](https://dsd.brokenbydesign.xyz){:target="_blank"} once the Domain Ages enough!
+Will be moved to [dsd.brokenbydesign.xyz](https://dsd.brokenbydesign.xyz) once the Domain Ages enough!
 
 ---
 ## Contributing!
